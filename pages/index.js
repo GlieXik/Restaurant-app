@@ -17,9 +17,6 @@ export default function Home() {
   );
 }
 export async function getServerSideProps({ params }) {
-  const { data } = await axios.get(`/api/menu`);
-  console.log(data.menu);
-
   return {
     props: {},
   };
