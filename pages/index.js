@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import axios from "axios";
-export default function Home() {
+import { Menu } from "@/components/Menu/Menu";
+export default function Home({ menu }) {
   return (
     <>
       <Head>
@@ -10,17 +11,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="favicon.ico" />
       </Head>
-      <main>
-        <h1>Hi</h1>
-      </main>
+
+      <Menu menu={menu}></Menu>
+      <main></main>
     </>
   );
 }
-export async function getServerSideProps({ params }) {
+export async function getStaticProps() {
   const { data } = await axios.get(`${process.env.BASE_SITE}/api/menu`);
-  console.log(data.menu);
+  const menu = data.menu;
 
   return {
-    props: {},
+    props: { menu },
   };
 }

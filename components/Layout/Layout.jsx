@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import { Header } from "./Header";
+import Header from "./Header";
 import { Roboto } from "@next/font/google";
 
 const roboto = Roboto({
