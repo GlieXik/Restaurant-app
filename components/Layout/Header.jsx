@@ -17,13 +17,16 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { ListSubheader } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+
+  backgroundColor: "rgba(0, 0, 0, 0.2)",
+
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -146,7 +149,7 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" color="">
         <Toolbar>
           <IconButton
             size="large"

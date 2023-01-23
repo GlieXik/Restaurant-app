@@ -1,7 +1,10 @@
 import Head from "next/head";
-import Image from "next/image";
+
 import axios from "axios";
 import { Menu } from "@/components/Menu/Menu";
+import Grid from "@mui/material/Grid";
+import { ListSubheader, Paper } from "@mui/material";
+import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 export default function Home({ menu }) {
   return (
     <>
@@ -12,12 +15,23 @@ export default function Home({ menu }) {
         <link rel="icon" href="favicon.ico" />
       </Head>
 
-      <Menu menu={menu}></Menu>
-      <main></main>
+      <main>
+        <Grid container spacing={3} sx={{ mt: 1 }}>
+          <Grid item xs>
+            <Menu menu={menu}></Menu>
+          </Grid>
+          <Grid item xs={6}>
+            <ListMenu menu={menu}></ListMenu>
+          </Grid>
+          <Grid item xs>
+            <Paper>xs</Paper>
+          </Grid>
+        </Grid>
+      </main>
     </>
   );
 }
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { data } = await axios.get(`${process.env.BASE_SITE}/api/menu`);
   const menu = data.menu;
 

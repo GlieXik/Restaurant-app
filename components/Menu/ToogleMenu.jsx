@@ -13,6 +13,8 @@ import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox
 import toLowerCase from "@/lib/toLowerCase";
 import { nanoid } from "nanoid";
 
+import { Link } from "react-scroll";
+
 const ToogleMenu = ({ type, categories }) => {
   const [open, setOpen] = useState(false);
 
@@ -52,11 +54,19 @@ const ToogleMenu = ({ type, categories }) => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {categories.map((e) => {
+          {categories.map((category) => {
             return (
-              <ListItemButton sx={{ pl: 12 }} key={nanoid()}>
-                <ListItemText primary={e} />
-              </ListItemButton>
+              <Link
+                key={nanoid()}
+                to={category}
+                spy={true}
+                smooth={true}
+                duration={500}
+              >
+                <ListItemButton sx={{ pl: 12 }}>
+                  <ListItemText primary={category} />
+                </ListItemButton>
+              </Link>
             );
           })}
         </List>

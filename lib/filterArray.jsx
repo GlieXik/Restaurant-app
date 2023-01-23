@@ -11,6 +11,9 @@ const filterArray = (array) => {
         result[index].categories.push(category);
     });
   });
+  result.map(({ categories }) => {
+    categories.sort();
+  });
 
   return result;
 };

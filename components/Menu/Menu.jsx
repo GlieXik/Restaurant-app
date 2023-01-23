@@ -4,19 +4,23 @@ import List from "@mui/material/List";
 
 import ToogleMenu from "./ToogleMenu";
 import filterArray from "@/lib/filterArray";
+import { Typography } from "@mui/material";
 
 export const Menu = ({ menu }) => {
   return (
     <>
       <List
-        sx={{ width: "100%", maxWidth: 350, bgcolor: "background.paper" }}
+        sx={{
+          width: "100%",
+          maxWidth: 350,
+          bgcolor: "background.paper",
+          paddingBottom: 0,
+          position: "sticky",
+          top: 80,
+        }}
         component="nav"
         aria-labelledby="nested-list-subheader"
-        subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            Меню :
-          </ListSubheader>
-        }
+        subheader={<Typography>Меню :</Typography>}
       >
         {filterArray(menu).map(({ type, categories }) => (
           <ToogleMenu
