@@ -5,7 +5,7 @@ import { Menu } from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
 import { Box, ListSubheader, Paper } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
-
+axios.defaults.baseURL = `${process.env.BASE_SITE}`;
 export default function Home({ menu }) {
   return (
     <>
@@ -40,8 +40,7 @@ export default function Home({ menu }) {
     </>
   );
 }
-export async function getServerSideProps() {
-  axios.defaults.baseURL = `${process.env.BASE_SITE}`;
+export async function getStaticProps() {
   const { data } = await axios(`/api/menu`);
   const menu = data.menu;
 
