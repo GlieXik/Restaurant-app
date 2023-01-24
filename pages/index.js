@@ -41,9 +41,10 @@ export default function Home({ menu }) {
   );
 }
 export async function getStaticProps() {
-  const { data } = await axios.get(`${process.env.BASE_SITE}/api/menu`);
+  axios.defaults.baseURL = `${process.env.BASE_SITE}`;
+  const { data } = await axios(`/api/menu`);
   const menu = data.menu;
-  console.log(menu);
+
   return {
     props: { menu },
   };
