@@ -19,19 +19,21 @@ const ListMenu = ({ menu }) => {
   const renderMenu = (datas) => {
     return datas.map(({ category, data }) => (
       <Fragment key={nanoid()}>
-        <ListSubheader
-          component="div"
-          sx={{
-            fontSize: 20,
-            fontWeight: "600",
-            color: "black",
-            paddingLeft: 1,
-            paddingRight: 1,
-            marginBottom: 1,
-          }}
-        >
-          <Element name={category}>{category}</Element>
-        </ListSubheader>
+        <Element name={category}>
+          <ListSubheader
+            component="div"
+            sx={{
+              fontSize: 20,
+              fontWeight: "600",
+              color: "black",
+              paddingLeft: 1,
+              paddingRight: 1,
+              marginBottom: 1,
+            }}
+          >
+            {category}
+          </ListSubheader>
+        </Element>
 
         {data.map(({ name, description, weigth, image, persent_alcho }) => {
           return (

@@ -15,10 +15,8 @@ export const Menu = ({ menu }) => {
           maxWidth: 350,
           bgcolor: "background.paper",
           paddingBottom: 0,
-          position: "sticky",
-          top: 80,
         }}
-        component="nav"
+        component="aside"
         aria-labelledby="nested-list-subheader"
         subheader={<Typography>Меню :</Typography>}
       >

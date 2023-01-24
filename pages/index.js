@@ -3,8 +3,9 @@ import Head from "next/head";
 import axios from "axios";
 import { Menu } from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
-import { ListSubheader, Paper } from "@mui/material";
+import { Box, ListSubheader, Paper } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
+
 export default function Home({ menu }) {
   return (
     <>
@@ -17,13 +18,21 @@ export default function Home({ menu }) {
 
       <main>
         <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid item xs>
+          <Grid
+            item
+            xs
+            sx={{ position: "sticky", top: 80, alignSelf: "start" }}
+          >
             <Menu menu={menu}></Menu>
           </Grid>
           <Grid item xs={6}>
             <ListMenu menu={menu}></ListMenu>
           </Grid>
-          <Grid item xs>
+          <Grid
+            item
+            xs
+            sx={{ position: "sticky", top: 80, alignSelf: "start" }}
+          >
             <Paper>xs</Paper>
           </Grid>
         </Grid>
@@ -34,7 +43,7 @@ export default function Home({ menu }) {
 export async function getServerSideProps() {
   const { data } = await axios.get(`${process.env.BASE_SITE}/api/menu`);
   const menu = data.menu;
-
+  console.log(menu);
   return {
     props: { menu },
   };
