@@ -85,8 +85,8 @@ const ListMenu = ({ menu }) => {
                   <Image
                     src={image}
                     alt="Picture of the author"
-                    width={100}
-                    height={100}
+                    width={128}
+                    height={96}
                   />
                 </Box>
               </CardContent>
