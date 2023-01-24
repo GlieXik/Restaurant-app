@@ -40,7 +40,7 @@ export default function Home({ menu }) {
     </>
   );
 }
-export async function getStaticProps() {
+export async function getServerSideProps() {
   axios.defaults.baseURL = `${process.env.BASE_SITE}`;
   const { data } = await axios(`/api/menu`);
   const menu = data.menu;
