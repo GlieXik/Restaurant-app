@@ -1,4 +1,4 @@
-import { Box, ListSubheader } from "@mui/material";
+import { Box, List, ListItemText, ListSubheader } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
@@ -20,19 +20,19 @@ const ListMenu = ({ menu }) => {
     return datas.map(({ category, data }) => (
       <Fragment key={nanoid()}>
         <Element name={category}>
-          <ListSubheader
+          <List
             component="div"
             sx={{
               fontSize: 20,
               fontWeight: "600",
-              color: "black",
+              color: "#303030",
               paddingLeft: 1,
               paddingRight: 1,
               marginBottom: 1,
             }}
           >
             {category}
-          </ListSubheader>
+          </List>
         </Element>
 
         {data.map(({ name, description, weigth, image, persent_alcho }) => {

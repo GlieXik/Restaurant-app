@@ -11,8 +11,6 @@ export const Menu = ({ menu }) => {
     <>
       <List
         sx={{
-          width: "100%",
-          maxWidth: 350,
           bgcolor: "background.paper",
           paddingBottom: 0,
         }}

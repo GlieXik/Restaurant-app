@@ -3,9 +3,18 @@ import Head from "next/head";
 import axios from "axios";
 import { Menu } from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
-import { Box, ListSubheader, Paper } from "@mui/material";
+import { Box, ListSubheader, Paper, styled } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
+import InfoPanel from "@/components/InfoPanel/InfoPanel";
 axios.defaults.baseURL = `${process.env.BASE_SITE}`;
+
+const GridStyled = styled(Grid)(({ theme }) => ({
+  [theme.breakpoints.up("md")]: {
+    position: "sticky",
+    top: 80,
+    alignSelf: "start",
+  },
+}));
 export default function Home({ menu }) {
   return (
     <>
@@ -17,24 +26,16 @@ export default function Home({ menu }) {
       </Head>
 
       <main>
-        <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid
-            item
-            xs
-            sx={{ position: "sticky", top: 80, alignSelf: "start" }}
-          >
+        <Grid container sx={{ mt: 1 }} columnSpacing={3} rowSpacing={1}>
+          <GridStyled md={3} xs={12} item>
             <Menu menu={menu}></Menu>
-          </Grid>
-          <Grid item xs={6}>
+          </GridStyled>
+          <Grid md={6} xs={12} item>
             <ListMenu menu={menu}></ListMenu>
           </Grid>
-          <Grid
-            item
-            xs
-            sx={{ position: "sticky", top: 80, alignSelf: "start" }}
-          >
-            <Paper>xs</Paper>
-          </Grid>
+          <GridStyled md={3} xs={12} item>
+            <InfoPanel></InfoPanel>
+          </GridStyled>
         </Grid>
       </main>
     </>

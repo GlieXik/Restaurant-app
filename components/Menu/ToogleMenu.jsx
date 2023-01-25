@@ -47,7 +47,11 @@ const ToogleMenu = ({ type, categories }) => {
   };
   return (
     <>
-      <ListItemButton key={nanoid()} onClick={handleClick}>
+      <ListItemButton
+        key={nanoid()}
+        onClick={handleClick}
+        sx={{ borderRadius: 1 }}
+      >
         {settingIcon(type)}
         <ListItemText primary={type} />
         {open ? <ExpandLess /> : <ExpandMore />}
@@ -63,7 +67,7 @@ const ToogleMenu = ({ type, categories }) => {
                 smooth={true}
                 duration={500}
               >
-                <ListItemButton sx={{ pl: 12 }}>
+                <ListItemButton sx={{ pl: 12, borderRadius: 1 }}>
                   <ListItemText primary={category} />
                 </ListItemButton>
               </Link>
