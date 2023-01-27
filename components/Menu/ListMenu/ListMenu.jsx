@@ -1,4 +1,11 @@
-import { Box, List, ListItemText, ListSubheader } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  List,
+  ListItemText,
+  ListSubheader,
+  Stack,
+} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
@@ -8,10 +15,11 @@ import ScaleIcon from "@mui/icons-material/Scale";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import Image from "next/image";
 import { nanoid } from "nanoid";
-import { Fragment } from "react";
+import { Fragment, memo, useEffect, useState } from "react";
 import filterMenu from "@/lib/filterMenu";
 
 import { Element } from "react-scroll";
+import Like from "../Like";
 
 const ListMenu = ({ menu }) => {
   menu.sort((a, b) => (a.category > b.category ? 1 : -1));
@@ -23,76 +31,84 @@ const ListMenu = ({ menu }) => {
           <List
             component="div"
             sx={{
-              fontSize: 20,
-              fontWeight: "600",
-              color: "#303030",
               paddingLeft: 1,
               paddingRight: 1,
               marginBottom: 1,
             }}
           >
-            {category}
+            <Typography
+              sx={{ fontSize: 20, fontWeight: "600", color: "#303030" }}
+            >
+              {category}
+            </Typography>
           </List>
         </Element>
 
-        {data.map(({ name, description, weigth, image, persent_alcho }) => {
-          return (
-            <Card
-              key={nanoid()}
-              sx={{
-                marginBottom: 2,
-                ":nth-last-of-type(1)": { marginBottom: 0 },
-              }}
-            >
-              <CardContent
+        {data.map(
+          ({ name, description, weigth, image, persent_alcho, like, _id }) => {
+            return (
+              <Card
+                key={nanoid()}
                 sx={{
-                  display: "flex",
-                  gap: 2,
-                  justifyContent: "space-between",
+                  marginBottom: 2,
+                  ":nth-last-of-type(1)": { marginBottom: 0 },
                 }}
               >
-                <Box>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {name}
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 1.5 }}>
-                    {description}
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: 1,
-                      alignItems: "center",
-                    }}
-                  >
-                    {weigth && (
-                      <>
-                        <ScaleIcon sx={{ fontSize: 12 }} />
-                        <Typography sx={{ fontSize: 12 }}>{weigth}г</Typography>
-                      </>
-                    )}
-                    {persent_alcho > 0 && (
-                      <>
-                        <LocalBarIcon sx={{ fontSize: 12 }} />
-                        <Typography sx={{ fontSize: 12 }}>
-                          {persent_alcho}%
-                        </Typography>
-                      </>
-                    )}
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    gap: 2,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {name}
+                    </Typography>
+                    <Typography variant="body2" sx={{ mb: 1.5 }}>
+                      {description}
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: 1,
+                        alignItems: "center",
+                        marginBottom: 1,
+                      }}
+                    >
+                      {weigth && (
+                        <>
+                          <ScaleIcon sx={{ fontSize: 12 }} />
+                          <Typography sx={{ fontSize: 12 }}>
+                            {weigth}г
+                          </Typography>
+                        </>
+                      )}
+                      {persent_alcho > 0 && (
+                        <>
+                          <LocalBarIcon sx={{ fontSize: 12 }} />
+                          <Typography sx={{ fontSize: 12 }}>
+                            {persent_alcho}%
+                          </Typography>
+                        </>
+                      )}
+                    </Box>
+                    <Like like={like} id={_id}></Like>
                   </Box>
-                </Box>
-                <Box>
-                  <Image
-                    src={image}
-                    alt="Picture of the author"
-                    width={128}
-                    height={96}
-                  />
-                </Box>
-              </CardContent>
-            </Card>
-          );
-        })}
+
+                  <Box>
+                    <Image
+                      src={image}
+                      alt="Picture of the author"
+                      width={128}
+                      height={96}
+                    />
+                  </Box>
+                </CardContent>
+              </Card>
+            );
+          }
+        )}
       </Fragment>
     ));
   };

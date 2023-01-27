@@ -3,15 +3,6 @@
 import dbConnect from "@/lib/mongoose";
 import Menu from "@/model/Menu";
 
-// import connectDB from "@/lib/mongodb";
-
-// const handler = async (req, res) => {
-//   const { db } = await connectDB();
-
-//   const menu = await db.collection("menu").find().toArray();
-//   res.status(200).json({ menu });
-// };
-// export default handler;
 async function findAllProducts() {
   return Menu.find({});
 }

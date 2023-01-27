@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -9,6 +9,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import SoupKitchenIcon from "@mui/icons-material/SoupKitchen";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 import toLowerCase from "@/lib/toLowerCase";
 import { nanoid } from "nanoid";
@@ -18,9 +19,14 @@ import { Link } from "react-scroll";
 const ToogleMenu = ({ type, categories }) => {
   const [open, setOpen] = useState(false);
 
+  // useEffect(() => {
+  //   // document.addEventListener("scroll", (e) => console.log(window.scrollY));
+  // }, []);
+
   const handleClick = () => {
     setOpen(!open);
   };
+
   const settingIcon = (type) => {
     switch (toLowerCase(type)) {
       case "кухня":
@@ -66,8 +72,12 @@ const ToogleMenu = ({ type, categories }) => {
                 spy={true}
                 smooth={true}
                 duration={500}
+                offset={-70}
               >
                 <ListItemButton sx={{ pl: 12, borderRadius: 1 }}>
+                  {/* <FiberManualRecordIcon
+                    sx={{ width: 8, position: "absolute", left: 80 }}
+                  ></FiberManualRecordIcon> */}
                   <ListItemText primary={category} />
                 </ListItemButton>
               </Link>
