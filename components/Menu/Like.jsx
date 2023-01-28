@@ -4,12 +4,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useEffect, useState, useMemo, useContext } from "react";
 import { LikedContext } from "../LikedContext";
 import axios from "axios";
+import useSWR from "swr";
 
 const Like = ({ id, like }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(like);
 
   const { selectedLikes, setSelectedLikes } = useContext(LikedContext);
+
   useEffect(() => {
     if (selectedLikes.length === 0) {
       return;
@@ -22,10 +24,11 @@ const Like = ({ id, like }) => {
     if (!liked) {
       setLikes(likes + 1);
       setSelectedLikes((prev) => [...prev, id]);
-      await axios.put(`http://localhost:3000/api/like?id=${id}`);
+      await axios.put(`/api/like?id=${id}`);
     } else {
       setLikes(likes - 1);
       setSelectedLikes((prev) => prev.filter((item) => item !== id));
+      await axios.delete(`/api/like?id=${id}`);
     }
     setLiked(!liked);
   };

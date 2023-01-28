@@ -6,7 +6,8 @@ import Grid from "@mui/material/Grid";
 import { Box, ListSubheader, Paper, styled } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
-axios.defaults.baseURL = `${process.env.BASE_SITE}`;
+import dbConnect from "@/lib/mongoose";
+import { findAllProducts } from "./api/menu";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -42,10 +43,9 @@ export default function Home({ menu }) {
   );
 }
 export async function getStaticProps() {
-  const { data } = await axios(`/api/menu`);
-  const menu = data.menu;
-
+  await dbConnect();
+  const menu = await findAllProducts();
   return {
-    props: { menu },
+    props: { menu: JSON.parse(JSON.stringify(menu)) },
   };
 }
