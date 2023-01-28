@@ -43,7 +43,7 @@ const Home = ({ menu }) => {
     </>
   );
 };
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   await dbConnect();
   const data = await Menu.find();
   return {
