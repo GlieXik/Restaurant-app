@@ -17,7 +17,7 @@ const GridStyled = styled(Grid)(({ theme }) => ({
     alignSelf: "start",
   },
 }));
-const Home = () => {
+const Home = ({ menu }) => {
   return (
     <>
       <Head>
@@ -26,7 +26,7 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="favicon.ico" />
       </Head>
-      {/*       
+
       <main>
         <Grid container sx={{ mt: 1 }} columnSpacing={3} rowSpacing={1}>
           <GridStyled md={3} xs={12} item>
@@ -39,7 +39,7 @@ const Home = () => {
             <InfoPanel></InfoPanel>
           </GridStyled>
         </Grid>
-      </main> */}
+      </main>
     </>
   );
 };
