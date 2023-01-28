@@ -17,6 +17,7 @@ const GridStyled = styled(Grid)(({ theme }) => ({
   },
 }));
 export default function Home({ menu }) {
+  console.log(menu);
   return (
     <>
       <Head>
@@ -45,6 +46,7 @@ export default function Home({ menu }) {
 export async function getServerSideProps() {
   await dbConnect();
   const menu = await findAllProducts();
+
   return {
     props: { menu: JSON.parse(JSON.stringify(menu)) },
   };
