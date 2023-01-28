@@ -1,14 +1,13 @@
 import Head from "next/head";
 
-import axios from "axios";
 import { MenuCom } from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
-import { Box, ListSubheader, Paper, styled } from "@mui/material";
+import { styled } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongoose";
 
-import menu from "@/models/Menu";
+import Menu from "@/models/Menu";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -45,7 +44,7 @@ const Home = ({ menu }) => {
 };
 export const getServerSideProps = async () => {
   await dbConnect();
-  const data = await menu.find();
+  const data = await Menu.find();
   return {
     props: { menu: JSON.parse(JSON.stringify(data)) },
   };

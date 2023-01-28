@@ -1,11 +1,4 @@
-import {
-  Box,
-  IconButton,
-  List,
-  ListItemText,
-  ListSubheader,
-  Stack,
-} from "@mui/material";
+import { Box, List } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
@@ -15,7 +8,7 @@ import ScaleIcon from "@mui/icons-material/Scale";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import Image from "next/image";
 import { nanoid } from "nanoid";
-import { Fragment, memo, useEffect, useState } from "react";
+import { Fragment } from "react";
 import filterMenu from "@/lib/filterMenu";
 
 import { Element } from "react-scroll";
