@@ -7,7 +7,7 @@ import { Box, ListSubheader, Paper, styled } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongoose";
-import { Connetcion } from "./api/menu";
+
 import Menu from "@/model/Menu";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
