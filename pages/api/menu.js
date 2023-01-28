@@ -6,6 +6,7 @@ export async function findAllProducts() {
 }
 
 export default async function handle(req, res) {
+  await dbConnect();
   const menu = await findAllProducts();
   res.status(200).json({ menu });
 }
