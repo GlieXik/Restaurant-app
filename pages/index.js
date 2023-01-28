@@ -42,7 +42,7 @@ export default function Home({ menu }) {
     </>
   );
 }
-export async function getServerSideProps() {
+export async function getStaticProps() {
   await dbConnect();
   const menu = await findAllProducts();
 
