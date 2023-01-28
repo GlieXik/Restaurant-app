@@ -17,7 +17,7 @@ const GridStyled = styled(Grid)(({ theme }) => ({
     alignSelf: "start",
   },
 }));
-export default function Home({ menu }) {
+const Home = ({ menu }) => {
   return (
     <>
       <Head>
@@ -42,11 +42,12 @@ export default function Home({ menu }) {
       </main>
     </>
   );
-}
-export async function getServerSideProps() {
+};
+export const getServerSideProps = async () => {
   await dbConnect();
   const data = await Menu.find();
   return {
     props: { menu: JSON.parse(JSON.stringify(data)) },
   };
-}
+};
+export default Home;
