@@ -44,9 +44,9 @@ export default function Home({ menu }) {
   );
 }
 export async function getServerSideProps() {
-  await Connetcion();
-
+  await dbConnect();
+  const data = await Menu.find();
   return {
-    props: { menu: JSON.parse(JSON.stringify(await Menu.find())) },
+    props: { menu: JSON.parse(JSON.stringify(data)) },
   };
 }
