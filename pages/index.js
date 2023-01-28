@@ -17,7 +17,7 @@ const GridStyled = styled(Grid)(({ theme }) => ({
     alignSelf: "start",
   },
 }));
-const Home = ({ menu }) => {
+const Home = () => {
   return (
     <>
       <Head>
