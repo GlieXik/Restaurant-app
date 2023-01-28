@@ -24,11 +24,11 @@ const Like = ({ id, like }) => {
     if (!liked) {
       setLikes(likes + 1);
       setSelectedLikes((prev) => [...prev, id]);
-      await axios.put(`/api/like?id=${id}`);
+      await axios.put(`/api/like?id=${id}`).then(console.log);
     } else {
       setLikes(likes - 1);
       setSelectedLikes((prev) => prev.filter((item) => item !== id));
-      await axios.delete(`/api/like?id=${id}`);
+      await axios.delete(`/api/like?id=${id}`).then(console.log);
     }
     setLiked(!liked);
   };

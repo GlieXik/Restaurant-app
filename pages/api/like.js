@@ -13,11 +13,11 @@ export default async function likeOnMongo(req, res) {
     await dbConnect();
     const { id } = req.query;
     if (req.method === "PUT") {
-      await addLike(id);
-      res.status(200).json({ status: "Ok" });
+      const add = await addLike(id);
+      res.status(200).send(add);
     } else if (req.method === "DELETE") {
-      await delLike(id);
-      res.status(200).json({ status: "Ok" });
+      const del = await delLike(id);
+      res.status(200).send(del);
     } else {
       res.status(405).json({ message: "Bad method" });
     }
