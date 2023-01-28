@@ -6,9 +6,6 @@ export const LikedContextProvider = ({ children }) => {
   const [selectedLikes, setSelectedLikes] = useLocalStorageState("liked", {
     defaultValue: [],
   });
-  console.log("====================================");
-  console.log(selectedLikes);
-  console.log("====================================");
   return (
     <>
       <LikedContext.Provider value={{ selectedLikes, setSelectedLikes }}>

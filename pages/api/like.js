@@ -22,7 +22,6 @@ export default async function likeOnMongo(req, res) {
       res.status(405).json({ message: "Bad method" });
     }
   } catch (e) {
-    console.log(e);
     res.status(500).send();
   }
 }
