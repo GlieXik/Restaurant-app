@@ -26,7 +26,7 @@ const Home = ({ menu }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="favicon.ico" />
       </Head>
-      {/* 
+      {/*       
       <main>
         <Grid container sx={{ mt: 1 }} columnSpacing={3} rowSpacing={1}>
           <GridStyled md={3} xs={12} item>
@@ -43,11 +43,11 @@ const Home = ({ menu }) => {
     </>
   );
 };
-export const getServerSideProps = async () => {
-  await dbConnect();
-  const data = await Menu.find();
-  return {
-    props: { menu: JSON.parse(JSON.stringify(data)) },
-  };
-};
+// export const getServerSideProps = async () => {
+//   await dbConnect();
+//   const data = await Menu.find();
+//   return {
+//     props: { menu: JSON.parse(JSON.stringify(data)) },
+//   };
+// };
 export default Home;
