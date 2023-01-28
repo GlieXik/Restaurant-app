@@ -17,7 +17,6 @@ const GridStyled = styled(Grid)(({ theme }) => ({
   },
 }));
 export default function Home({ menu }) {
-  console.log(menu);
   return (
     <>
       <Head>
