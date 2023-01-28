@@ -1,13 +1,14 @@
 import Head from "next/head";
 
 import axios from "axios";
-import { Menu } from "@/components/Menu/Menu";
+import { MenuCom } from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
 import { Box, ListSubheader, Paper, styled } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongoose";
-import { findAllProducts } from "./api/menu";
+import { Connetcion } from "./api/menu";
+import Menu from "@/model/Menu";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -29,7 +30,7 @@ export default function Home({ menu }) {
       <main>
         <Grid container sx={{ mt: 1 }} columnSpacing={3} rowSpacing={1}>
           <GridStyled md={3} xs={12} item>
-            <Menu menu={menu}></Menu>
+            <MenuCom menu={menu}></MenuCom>
           </GridStyled>
           <Grid md={6} xs={12} item>
             <ListMenu menu={menu}></ListMenu>
@@ -43,19 +44,9 @@ export default function Home({ menu }) {
   );
 }
 export async function getServerSideProps() {
-  try {
-    await dbConnect();
-    const menu = await findAllProducts();
+  await Connetcion();
 
-    return {
-      props: { menu: JSON.parse(JSON.stringify(menu)) },
-    };
-  } catch (error) {
-    console.log("====================================");
-    console.log(error);
-    console.log("====================================");
-    return {
-      notFound: true,
-    };
-  }
+  return {
+    props: { menu: JSON.parse(JSON.stringify(await Menu.find())) },
+  };
 }

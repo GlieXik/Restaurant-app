@@ -12,4 +12,5 @@ const MenuSchema = new Schema({
   weigth: Number,
 });
 
-module.exports = models.Menu || model("Menu", MenuSchema);
+const Menu = models.Menu || model("Menu", MenuSchema);
+export default Menu;

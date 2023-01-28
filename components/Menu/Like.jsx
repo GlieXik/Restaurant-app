@@ -4,7 +4,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useEffect, useState, useMemo, useContext } from "react";
 import { LikedContext } from "../LikedContext";
 import axios from "axios";
-import useSWR from "swr";
 
 const Like = ({ id, like }) => {
   const [liked, setLiked] = useState(false);
