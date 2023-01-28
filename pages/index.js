@@ -43,9 +43,19 @@ export default function Home({ menu }) {
   );
 }
 export async function getServerSideProps() {
-  const menu = await findAllProducts();
+  try {
+    await dbConnect();
+    const menu = await findAllProducts();
 
-  return {
-    props: { menu: JSON.parse(JSON.stringify(menu)) },
-  };
+    return {
+      props: { menu: JSON.parse(JSON.stringify(menu)) },
+    };
+  } catch (error) {
+    console.log("====================================");
+    console.log(error);
+    console.log("====================================");
+    return {
+      notFound: true,
+    };
+  }
 }
