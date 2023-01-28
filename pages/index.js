@@ -8,7 +8,7 @@ import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongoose";
 
-import Menu from "@/model/Menu";
+import menu from "@/models/Menu";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -43,11 +43,11 @@ const Home = () => {
     </>
   );
 };
-// export const getServerSideProps = async () => {
-//   await dbConnect();
-//   const data = await Menu.find();
-//   return {
-//     props: { menu: JSON.parse(JSON.stringify(data)) },
-//   };
-// };
+export const getServerSideProps = async () => {
+  await dbConnect();
+  const data = await menu.find();
+  return {
+    props: { menu: JSON.parse(JSON.stringify(data)) },
+  };
+};
 export default Home;
