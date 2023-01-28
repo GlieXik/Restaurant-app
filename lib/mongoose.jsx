@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const MONGO_URI = process.env.MONGO_URI;
+const MONGOSSE_URI = process.env.MONGOSSE_URI;
 
 export default async function dbConnect() {
-  mongoose.connect(MONGO_URI);
+  mongoose.connect(MONGOSSE_URI);
 }
