@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   serverRuntimeConfig: {
-    secondSecret: process.env.MONGO_URI,
+    MONGO_URI: process.env.MONGO_URI,
   },
 };
 
