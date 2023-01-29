@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -9,7 +9,6 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import SportsBarIcon from "@mui/icons-material/SportsBar";
 import SoupKitchenIcon from "@mui/icons-material/SoupKitchen";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 import toLowerCase from "@/utils/toLowerCase";
 import { nanoid } from "nanoid";
@@ -18,10 +17,6 @@ import { Link } from "react-scroll";
 
 const ToogleMenu = ({ type, categories }) => {
   const [open, setOpen] = useState(false);
-
-  // useEffect(() => {
-  //   // document.addEventListener("scroll", (e) => console.log(window.scrollY));
-  // }, []);
 
   const handleClick = () => {
     setOpen(!open);
