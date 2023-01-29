@@ -46,6 +46,9 @@ const Home = ({ menu }) => {
     </>
   );
 };
+export const config = {
+  runtime: "nodejs",
+};
 export async function getServerSideProps(ctx) {
   try {
     // const mongoClient = await clientPromise;
