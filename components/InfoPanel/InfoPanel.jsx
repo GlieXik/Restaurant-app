@@ -1,5 +1,4 @@
-import { FavoriteBorder } from "@mui/icons-material";
-import { Box, Icon, IconButton, Link, styled, Typography } from "@mui/material";
+import { Box, Icon, Link, styled, Typography } from "@mui/material";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PhoneIcon from "@mui/icons-material/Phone";
