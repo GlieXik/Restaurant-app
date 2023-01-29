@@ -1,15 +1,15 @@
 import Head from "next/head";
 
-import { MenuCom } from "@/components/Menu/Menu";
+// import { MenuCom } from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material";
-import ListMenu from "@/components/Menu/ListMenu/ListMenu";
+// import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 
-import clientPromise from "@/lib/mongodb";
+// import clientPromise from "@/lib/mongodb";
 
-import axios from "axios";
-import { fetching } from "@/utils/fetch";
+// import axios from "axios";
+// import { fetching } from "@/utils/fetch";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
