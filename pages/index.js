@@ -44,9 +44,15 @@ const Home = ({ menu }) => {
 };
 export const getServerSideProps = async () => {
   await dbConnect();
-  const data = await Menu.find();
+  const result = await Menu.find({});
+
+  const menus = result.map((doc) => {
+    const menu = doc.toObject();
+    menu._id = menu._id.toString();
+    return menu;
+  });
   return {
-    props: { menu: JSON.parse(JSON.stringify(data)) },
+    props: { menu: menus },
   };
 };
 export default Home;
