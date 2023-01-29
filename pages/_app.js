@@ -14,13 +14,13 @@ theme = responsiveFontSizes(theme);
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <LikedContextProvider>
-        <ThemeProvider theme={theme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
-      </LikedContextProvider>
+      {/* <LikedContextProvider> */}
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+      {/* </LikedContextProvider> */}
     </>
   );
 }
