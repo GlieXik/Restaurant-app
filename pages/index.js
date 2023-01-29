@@ -8,7 +8,6 @@ import InfoPanel from "@/components/InfoPanel/InfoPanel";
 
 import clientPromise from "@/lib/mongodb";
 
-import Menu from "@/models/Menu";
 import axios from "axios";
 import { fetching } from "@/utils/fetch";
 
