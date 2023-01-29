@@ -31,9 +31,9 @@ export default function Home({ menu }) {
 
       <main>
         <Grid container sx={{ mt: 1 }} columnSpacing={3} rowSpacing={1}>
-          <GridStyled md={3} xs={12} item>
+          {/* <GridStyled md={3} xs={12} item>
             <MenuCom menu={menu}></MenuCom>
-          </GridStyled>
+          </GridStyled> */}
           {/* <Grid md={6} xs={12} item>
             <ListMenu menu={menu}></ListMenu>
           </Grid> */}
