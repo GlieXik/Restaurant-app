@@ -49,13 +49,13 @@ const Home = ({ menu }) => {
 export async function getServerSideProps(ctx) {
   try {
     const mongoClient = await clientPromise;
-    const res = await fetching("api/menu");
-    // const db = mongoClient.db("duplomna");
-    // const collection = db.collection("menus");
-    // const results = await collection.find({}).toArray();
-    console.log(res);
+    // const res = await fetching("api/menu");
+    const db = mongoClient.db("duplomna");
+    const collection = db.collection("menus");
+    const results = await collection.find({}).toArray();
+    // console.log(res);
     return {
-      props: { menu: res },
+      props: { menu: JSON.parse(JSON.stringify(results)) },
     };
   } catch (error) {
     console.log(error);
