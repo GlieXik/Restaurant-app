@@ -48,14 +48,41 @@ const Home = ({ menu }) => {
 };
 export async function getServerSideProps(ctx) {
   try {
-    const mongoClient = await clientPromise;
+    // const mongoClient = await clientPromise;
     // const res = await fetching("api/menu");
-    const db = mongoClient.db("duplomna");
-    const collection = db.collection("menus");
-    const results = await collection.find({}).toArray();
+
+    // const db = mongoClient.db("duplomna");
+    // const collection = db.collection("menus");
+    // const results = await collection.find({}).toArray();
+
     // console.log(res);
     return {
-      props: { menu: JSON.parse(JSON.stringify(results)) },
+      props: {
+        menu: [
+          {
+            name: "feds",
+            price: 85,
+            image: "/menuImg/free.jpeg",
+            description: "dsadafdsadsfadfsfdsafdss",
+            weigth: 300,
+            persent_alcho: 4.2,
+            category: "Холодна закуска",
+            type: "Кухня",
+            like: 0,
+          },
+          {
+            name: "feds",
+            price: 85,
+            image: "/menuImg/free.jpeg",
+            description: "dsdsafdfgsssáadas",
+            weigth: 300,
+            persent_alcho: 4.2,
+            category: "Холодна закуска",
+            type: "Кухня",
+            like: 0,
+          },
+        ],
+      },
     };
   } catch (error) {
     console.log(error);
