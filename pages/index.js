@@ -20,6 +20,7 @@ const GridStyled = styled(Grid)(({ theme }) => ({
   },
 }));
 const Home = ({ menu }) => {
+  console.log(menu);
   return (
     <>
       <Head>
@@ -45,20 +46,20 @@ const Home = ({ menu }) => {
     </>
   );
 };
-export const getServerSideProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
   try {
     const mongoClient = await clientPromise;
-    // const res = await fetching("api/menu");
-    const db = mongoClient.db("duplomna");
-    const collection = db.collection("menus");
-    const results = await collection.find({}).toArray();
-
+    const res = await fetching("api/menu");
+    // const db = mongoClient.db("duplomna");
+    // const collection = db.collection("menus");
+    // const results = await collection.find({}).toArray();
+    console.log(res);
     return {
-      props: { menu: JSON.parse(JSON.stringify(results)) },
+      props: { menu: res },
     };
   } catch (error) {
     console.log(error);
     return { notFound: true };
   }
-};
+}
 export default Home;
