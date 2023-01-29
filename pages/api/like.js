@@ -1,5 +1,3 @@
-import dbConnect from "@/lib/mongoose";
-
 async function addLike(id) {
   return Menu.findOneAndUpdate({ _id: id }, { $inc: { like: 1 } });
 }

@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
-// import dbConnect from "@/lib/mongoose";
+
 import clientPromise from "@/lib/mongodb";
 
 import Menu from "@/models/Menu";
