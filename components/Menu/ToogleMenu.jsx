@@ -11,7 +11,7 @@ import SoupKitchenIcon from "@mui/icons-material/SoupKitchen";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
-import toLowerCase from "@/lib/toLowerCase";
+import toLowerCase from "@/utils/toLowerCase";
 import { nanoid } from "nanoid";
 
 import { Link } from "react-scroll";

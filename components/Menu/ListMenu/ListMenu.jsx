@@ -9,7 +9,7 @@ import LocalBarIcon from "@mui/icons-material/LocalBar";
 import Image from "next/image";
 import { nanoid } from "nanoid";
 import { Fragment } from "react";
-import filterMenu from "@/lib/filterMenu";
+import filterMenu from "@/utils/filterMenu";
 
 import { Element } from "react-scroll";
 import Like from "../Like";

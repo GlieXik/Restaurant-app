@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import List from "@mui/material/List";
 
 import ToogleMenu from "./ToogleMenu";
-import filterArray from "@/lib/filterArray";
+import filterArray from "@/utils/filterArray";
 import { Typography } from "@mui/material";
 
 export const MenuCom = ({ menu }) => {

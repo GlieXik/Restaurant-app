@@ -9,6 +9,8 @@ import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import clientPromise from "@/lib/mongodb";
 
 import Menu from "@/models/Menu";
+import axios from "axios";
+import { fetching } from "@/utils/fetch";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -43,7 +45,9 @@ const Home = ({ menu }) => {
     </>
   );
 };
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
+  const res = await fetching("api/menu");
+  console.log(res);
   try {
     const mongoClient = await clientPromise;
     const db = mongoClient.db("duplomna");
@@ -55,6 +59,7 @@ export const getServerSideProps = async () => {
     };
   } catch (error) {
     console.log(error);
+    return { notFound: true };
   }
 };
 export default Home;
