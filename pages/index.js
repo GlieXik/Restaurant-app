@@ -5,7 +5,8 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
-import dbConnect from "@/lib/mongoose";
+// import dbConnect from "@/lib/mongoose";
+import clientPromise from "@/lib/mongodb";
 
 import Menu from "@/models/Menu";
 
@@ -42,17 +43,18 @@ const Home = ({ menu }) => {
     </>
   );
 };
-export const getStaticProps = async () => {
-  await dbConnect();
-  const result = await Menu.find({});
+export const getServerSideProps = async () => {
+  try {
+    const mongoClient = await clientPromise;
+    const db = mongoClient.db("duplomna");
+    const collection = db.collection("menus");
+    const results = await collection.find({}).toArray();
 
-  const menus = result.map((doc) => {
-    const menu = doc.toObject();
-    menu._id = menu._id.toString();
-    return menu;
-  });
-  return {
-    props: { menu: menus },
-  };
+    return {
+      props: { menu: JSON.parse(JSON.stringify(results)) },
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
 export default Home;
