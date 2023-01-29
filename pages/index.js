@@ -19,7 +19,7 @@ const GridStyled = styled(Grid)(({ theme }) => ({
     alignSelf: "start",
   },
 }));
-const Home = ({ menu }) => {
+export default function Home({ menu }) {
   console.log(menu);
   return (
     <>
@@ -45,10 +45,8 @@ const Home = ({ menu }) => {
       </main>
     </>
   );
-};
-export const config = {
-  runtime: "nodejs",
-};
+}
+
 export async function getServerSideProps(ctx) {
   try {
     // const mongoClient = await clientPromise;
@@ -92,4 +90,3 @@ export async function getServerSideProps(ctx) {
     return { notFound: true };
   }
 }
-export default Home;
