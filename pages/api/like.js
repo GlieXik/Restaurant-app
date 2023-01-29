@@ -9,11 +9,10 @@ async function delLike(id) {
 
 export default async function likeOnMongo(req, res) {
   try {
-    await dbConnect();
     const { id } = req.query;
     if (req.method === "PUT") {
       const add = await addLike(id);
-      res.status(200).send(add);
+      res.status(200).json({ ok: "k" });
     } else if (req.method === "DELETE") {
       const del = await delLike(id);
       res.status(200).send(del);

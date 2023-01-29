@@ -23,7 +23,10 @@ const Like = ({ id, like }) => {
     if (!liked) {
       setLikes(likes + 1);
       setSelectedLikes((prev) => [...prev, id]);
-      await axios.put(`/api/like?id=${id}`).then(console.log);
+      await axios
+        .put(`/api/like?id=${id}`)
+        .then(console.log)
+        .catch((e) => console.log(e));
     } else {
       setLikes(likes - 1);
       setSelectedLikes((prev) => prev.filter((item) => item !== id));
