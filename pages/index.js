@@ -34,9 +34,9 @@ const Home = ({ menu }) => {
           <GridStyled md={3} xs={12} item>
             <MenuCom menu={menu}></MenuCom>
           </GridStyled>
-          <Grid md={6} xs={12} item>
+          {/* <Grid md={6} xs={12} item>
             <ListMenu menu={menu}></ListMenu>
-          </Grid>
+          </Grid> */}
           <GridStyled md={3} xs={12} item>
             <InfoPanel></InfoPanel>
           </GridStyled>
@@ -48,13 +48,13 @@ const Home = ({ menu }) => {
 export const getServerSideProps = async (ctx) => {
   try {
     const mongoClient = await clientPromise;
-    const res = await fetching("api/menu");
-    // const db = mongoClient.db("duplomna");
-    // const collection = db.collection("menus");
-    // const results = await collection.find({}).toArray();
+    // const res = await fetching("api/menu");
+    const db = mongoClient.db("duplomna");
+    const collection = db.collection("menus");
+    const results = await collection.find({}).toArray();
 
     return {
-      props: { menu: res },
+      props: { menu: JSON.parse(JSON.stringify(results)) },
     };
   } catch (error) {
     console.log(error);
