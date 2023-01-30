@@ -6,7 +6,10 @@ import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
-
+// import dynamic from "next/dynamic";
+// const ListMenu = dynamic(() => import("@/components/Menu/ListMenu/ListMenu"), {
+//   ssr: false,
+// });
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     position: "sticky",
@@ -46,10 +49,10 @@ export async function getServerSideProps(ctx) {
     await dbConnect();
 
     const results = await MenuModel.find({});
-
+    const sortMenu = results.sort((a, b) => (a.category > b.category ? 1 : -1));
     return {
       props: {
-        menu: JSON.parse(JSON.stringify(results)),
+        menu: JSON.parse(JSON.stringify(sortMenu)),
       },
     };
   } catch (error) {

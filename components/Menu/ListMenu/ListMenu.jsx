@@ -15,8 +15,6 @@ import { Element } from "react-scroll";
 import Like from "../Like";
 
 const ListMenu = ({ menu }) => {
-  menu.sort((a, b) => (a.category > b.category ? 1 : -1));
-
   const renderMenu = (datas) => {
     return datas.map(({ category, data }) => (
       <Fragment key={nanoid()}>
