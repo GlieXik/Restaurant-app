@@ -1,4 +1,4 @@
-// import clientPromise from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
 
 async function addLike(id) {
@@ -26,6 +26,7 @@ async function delLike(id) {
 
 export default async function likeOnMongo(req, res) {
   try {
+    await dbConnect();
     const { id } = req.query;
 
     if (req.method === "PUT") {
