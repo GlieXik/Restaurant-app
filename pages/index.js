@@ -1,5 +1,4 @@
 import Head from "next/head";
-// import clientPromise from "@/lib/mongodb";
 import { MenuCom } from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material";
@@ -7,9 +6,6 @@ import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
-
-// import axios from "axios";
-// import { fetching } from "@/utils/fetch";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -47,11 +43,6 @@ export default function Home({ menu }) {
 
 export async function getServerSideProps(ctx) {
   try {
-    // const mongoClient = await clientPromise;
-    // const db = mongoClient.db("duplomna");
-    // const collection = db.collection("menus");
-    // const results = await collection.find({}).toArray();
-
     await dbConnect();
 
     const results = await MenuModel.find({});
