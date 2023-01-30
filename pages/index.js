@@ -3,7 +3,7 @@ import clientPromise from "@/lib/mongodb";
 import { MenuCom } from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material";
-// import ListMenu from "@/components/Menu/ListMenu/ListMenu";
+import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 
 // import axios from "axios";
@@ -32,9 +32,9 @@ export default function Home({ menu }) {
           <GridStyled md={3} xs={12} item>
             <MenuCom menu={menu}></MenuCom>
           </GridStyled>
-          {/* <Grid md={6} xs={12} item>
+          <Grid md={6} xs={12} item>
             <ListMenu menu={menu}></ListMenu>
-          </Grid> */}
+          </Grid>
           <GridStyled md={3} xs={12} item>
             <InfoPanel></InfoPanel>
           </GridStyled>
@@ -47,8 +47,6 @@ export default function Home({ menu }) {
 export async function getServerSideProps(ctx) {
   try {
     const mongoClient = await clientPromise;
-    // const res = await fetching("api/menu");
-
     const db = mongoClient.db("duplomna");
     const collection = db.collection("menus");
     const results = await collection.find({}).toArray();
