@@ -23,10 +23,9 @@ async function delLike(id) {
 
   return results;
 }
-
+dbConnect();
 export default async function likeOnMongo(req, res) {
   try {
-    await dbConnect();
     const { id } = req.query;
 
     if (req.method === "PUT") {
