@@ -94,7 +94,17 @@ const ListMenu = ({ menu }) => {
                       {price} грн
                     </Typography>
 
-                    <Typography variant="body2" sx={{ mb: 1.5 }}>
+                    <Typography
+                      variant="body2"
+                      component="div"
+                      sx={{
+                        mb: 1.5,
+                        overflow: "hidden",
+                        display: "-webkit-box",
+                        "-webkit-line-clamp": "2",
+                        "-webkit-box-orient": "vertical",
+                      }}
+                    >
                       {description}
                     </Typography>
 
