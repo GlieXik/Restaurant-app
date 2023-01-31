@@ -9,10 +9,10 @@ import LocalBarIcon from "@mui/icons-material/LocalBar";
 import Image from "next/image";
 import { nanoid } from "nanoid";
 import { Fragment } from "react";
-import filterMenu from "@/utils/filterMenu";
 
 import { Element } from "react-scroll";
-import Like from "../Like";
+import Like from "./Like";
+import filteByMenu from "@/utils/filterByMenuCategotyes";
 
 const ListMenu = ({ menu }) => {
   const renderMenu = (datas) => {
@@ -105,7 +105,7 @@ const ListMenu = ({ menu }) => {
     ));
   };
 
-  return <>{renderMenu(filterMenu(menu))}</>;
+  return <>{renderMenu(filteByMenu(menu))}</>;
 };
 
 export default ListMenu;

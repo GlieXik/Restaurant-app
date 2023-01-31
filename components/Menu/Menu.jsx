@@ -18,13 +18,15 @@ export const MenuCom = ({ menu }) => {
         aria-labelledby="nested-list-subheader"
         subheader={<Typography>Меню :</Typography>}
       >
-        {filterArray(menu).map(({ type, categories }) => (
-          <ToogleMenu
-            key={nanoid()}
-            type={type}
-            categories={categories}
-          ></ToogleMenu>
-        ))}
+        {filterArray(menu).map(({ type, categories }) => {
+          return (
+            <ToogleMenu
+              key={nanoid()}
+              type={type}
+              categories={categories}
+            ></ToogleMenu>
+          );
+        })}
       </List>
     </>
   );
