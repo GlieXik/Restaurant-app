@@ -1,27 +1,33 @@
 import { IconButton, Stack, Typography } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, forwardRef } from "react";
 import { LikedContext } from "../../LikedContext";
 import axios from "axios";
+import { useSnackbar } from "notistack";
 
 const Like = ({ id, like }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(like);
 
   const { selectedLikes, setSelectedLikes } = useContext(LikedContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (selectedLikes.length === 0) {
       return;
     }
-
     setLiked(selectedLikes.includes(id));
   }, [id, selectedLikes]);
 
   const handleLike = async () => {
     if (!liked) {
       setLikes(likes + 1);
+      enqueueSnackbar("Дякуюмо!", {
+        variant: "success",
+        autoHideDuration: 2000,
+        anchorOrigin: { vertical: "bottom", horizontal: "right" },
+      });
       setSelectedLikes((prev) => [...prev, id]);
       await axios
         .put(`/api/like?id=${id}`)

@@ -6,10 +6,7 @@ import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
-// import dynamic from "next/dynamic";
-// const ListMenu = dynamic(() => import("@/components/Menu/ListMenu/ListMenu"), {
-//   ssr: false,
-// });
+
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     position: "sticky",
