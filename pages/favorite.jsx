@@ -23,7 +23,7 @@ const Favorite = ({ menu }) => {
     });
     return favoriteMenu;
   };
-
+  const favoriteList = filterFavoriteMenu();
   return (
     <>
       <Grid
@@ -33,13 +33,13 @@ const Favorite = ({ menu }) => {
         rowSpacing={1}
       >
         <Grid md={6} xs={12} item>
-          {filterFavoriteMenu() > 0 ? (
-            <ListMenu menu={filterFavoriteMenu()}></ListMenu>
+          {favoriteList.length > 0 ? (
+            <ListMenu menu={favoriteList}></ListMenu>
           ) : (
             <Box sx={{ textAlign: "center" }}>
               <Typography variant="h1">А ну ЛАЙКАЙ!</Typography>
               <Link href="/">
-                <IconButton>
+                <IconButton sx={{ borderRadius: 1 }}>
                   <ArrowBackIcon fontSize="large" />
                   <Typography>На головну</Typography>
                 </IconButton>
