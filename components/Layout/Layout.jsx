@@ -7,11 +7,11 @@ const roboto = Roboto({
   style: ["normal", "italic"],
   subsets: ["latin"],
 });
-export const Layout = ({ children }) => {
+export const Layout = ({ children, menu }) => {
   return (
     <>
       <Container fixed className={roboto.className}>
-        <Header></Header>
+        <Header menu={menu}></Header>
         {children}
         <footer>Foot</footer>
       </Container>

@@ -4,9 +4,8 @@ import List from "@mui/material/List";
 
 import ToogleMenu from "./ToogleMenu";
 import filterArray from "@/utils/filterArray";
-import { Typography } from "@mui/material";
 
-export const MenuCom = ({ menu }) => {
+const MenuCom = ({ menu, closeDrawer }) => {
   return (
     <>
       <List
@@ -16,7 +15,6 @@ export const MenuCom = ({ menu }) => {
         }}
         component="aside"
         aria-labelledby="nested-list-subheader"
-        subheader={<Typography>Меню :</Typography>}
       >
         {filterArray(menu).map(({ type, categories }) => {
           return (
@@ -24,6 +22,7 @@ export const MenuCom = ({ menu }) => {
               key={nanoid()}
               type={type}
               categories={categories}
+              closeDrawer={closeDrawer}
             ></ToogleMenu>
           );
         })}
@@ -31,3 +30,4 @@ export const MenuCom = ({ menu }) => {
     </>
   );
 };
+export default MenuCom;

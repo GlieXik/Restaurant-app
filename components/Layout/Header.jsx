@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
+
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -18,6 +19,10 @@ import Link from "next/link";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { LikedContext } from "../LikedContext";
+import { SwipeableDrawer } from "@mui/material";
+import dynamic from "next/dynamic";
+const MenuCom = dynamic(() => import("../Menu/Menu"));
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -60,49 +65,34 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Header() {
-  const [anchorEl, setAnchorEl] = useState(null);
+const Header = ({ menu }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [mobileDrawer, setMobileDrawer] = useState(null);
 
   const { selectedLikes } = useContext(LikedContext);
 
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMobileDrawer = Boolean(mobileDrawer);
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const handleDrawerOpen = (event) => {
+    console.log("open");
+    setMobileDrawer(event.currentTarget);
+  };
+  const handleDrawerClose = () => {
+    console.log("cloase");
+    setMobileDrawer(null);
+  };
 
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
+  const iOS =
+    typeof navigator !== "undefined" &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -150,6 +140,25 @@ export default function Header() {
       </MenuItem>
     </Menu>
   );
+  const renderMobileDrawer = (
+    <>
+      <SwipeableDrawer
+        open={isMobileDrawer}
+        onClose={handleDrawerClose}
+        onOpen={handleDrawerOpen}
+        anchor={"left"}
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+      >
+        <Box sx={{ width: 250 }} role="presentation">
+          <Typography variant="h3" textAlign="center" marginTop={3}>
+            Меню
+          </Typography>
+          <MenuCom menu={menu} closeDrawer={handleDrawerClose}></MenuCom>
+        </Box>
+      </SwipeableDrawer>
+    </>
+  );
 
   return (
     <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 999 }}>
@@ -160,7 +169,8 @@ export default function Header() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, display: { xs: "block", md: "none" } }}
+            onClick={handleDrawerOpen}
           >
             <MenuIcon />
           </IconButton>
@@ -219,7 +229,9 @@ export default function Header() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
+
+      {renderMobileDrawer}
     </Box>
   );
-}
+};
+export default Header;

@@ -15,7 +15,7 @@ import { nanoid } from "nanoid";
 
 import { Link } from "react-scroll";
 
-const ToogleMenu = ({ type, categories }) => {
+const ToogleMenu = ({ type, categories, closeDrawer }) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -68,8 +68,9 @@ const ToogleMenu = ({ type, categories }) => {
                 smooth={true}
                 duration={500}
                 offset={-70}
+                onClick={closeDrawer}
               >
-                <ListItemButton sx={{ pl: 12, borderRadius: 1 }}>
+                <ListItemButton sx={{ pl: 11, borderRadius: 1 }}>
                   {/* <FiberManualRecordIcon
                     sx={{ width: 8, position: "absolute", left: 80 }}
                   ></FiberManualRecordIcon> */}

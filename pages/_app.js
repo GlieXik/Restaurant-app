@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
       <SnackbarProvider maxSnack={3}>
         <LikedContextProvider>
           <ThemeProvider theme={theme}>
-            <Layout>
+            <Layout {...pageProps}>
               <Component {...pageProps} />
             </Layout>
           </ThemeProvider>

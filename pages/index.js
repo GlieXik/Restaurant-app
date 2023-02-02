@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { MenuCom } from "@/components/Menu/Menu";
+import MenuCom from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
@@ -26,7 +26,12 @@ export default function Home({ menu }) {
 
       <main>
         <Grid container sx={{ mt: 1 }} columnSpacing={3} rowSpacing={1}>
-          <GridStyled md={3} xs={12} item>
+          <GridStyled
+            md={3}
+            xs={12}
+            item
+            sx={{ display: { xs: "none", md: "block" } }}
+          >
             <MenuCom menu={menu}></MenuCom>
           </GridStyled>
           <Grid md={6} xs={12} item>
