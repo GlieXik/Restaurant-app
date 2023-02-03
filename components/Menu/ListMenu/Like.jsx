@@ -23,7 +23,7 @@ const Like = ({ id, like }) => {
   const handleLike = async () => {
     if (!liked) {
       setLikes(likes + 1);
-      enqueueSnackbar("Дякуюмо!", {
+      enqueueSnackbar("Дякуємо!", {
         variant: "success",
         autoHideDuration: 2000,
         anchorOrigin: { vertical: "bottom", horizontal: "right" },

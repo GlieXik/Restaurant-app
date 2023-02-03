@@ -6,6 +6,7 @@ import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
+import Nav from "@/components/Nav/Nav";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
