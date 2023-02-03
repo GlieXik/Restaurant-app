@@ -1,5 +1,6 @@
 import { Layout } from "@/components/Layout/Layout";
 import { LikedContextProvider } from "@/components/LikedContext";
+
 import "@/styles/globals.scss";
 import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
 import { SnackbarProvider } from "notistack";
@@ -13,6 +14,9 @@ let theme = createTheme({
 });
 theme = responsiveFontSizes(theme);
 export default function App({ Component, pageProps }) {
+  if (Component.getLayout) {
+    return Component.getLayout(<Component {...pageProps}></Component>);
+  }
   return (
     <>
       <SnackbarProvider maxSnack={3}>

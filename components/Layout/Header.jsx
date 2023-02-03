@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 
@@ -74,6 +74,10 @@ const Header = ({ menu }) => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isMobileDrawer = Boolean(mobileDrawer);
 
+  const iOS =
+    typeof navigator !== "undefined" &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent);
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -82,17 +86,11 @@ const Header = ({ menu }) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const handleDrawerOpen = (event) => {
-    console.log("open");
-    setMobileDrawer(event.currentTarget);
+    setMobileDrawer(true);
   };
   const handleDrawerClose = () => {
-    console.log("cloase");
     setMobileDrawer(null);
   };
-
-  const iOS =
-    typeof navigator !== "undefined" &&
-    /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -140,6 +138,7 @@ const Header = ({ menu }) => {
       </MenuItem>
     </Menu>
   );
+
   const renderMobileDrawer = (
     <>
       <SwipeableDrawer
@@ -147,6 +146,10 @@ const Header = ({ menu }) => {
         onClose={handleDrawerClose}
         onOpen={handleDrawerOpen}
         anchor={"left"}
+        disableSwipeToOpen={false}
+        ModalProps={{
+          keepMounted: true,
+        }}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
       >
@@ -230,7 +233,7 @@ const Header = ({ menu }) => {
       </AppBar>
       {renderMobileMenu}
 
-      {renderMobileDrawer}
+      {/* {renderMobileDrawer} */}
     </Box>
   );
 };
