@@ -18,9 +18,11 @@ const GridStyled = styled(Grid)(({ theme }) => ({
 }));
 export default function Home({ menu }) {
   const { searchValue } = useContext(SearchContext);
+
   const filteredMenuBySearch = menu.filter((item) => {
     return item.name.toLowerCase().includes(searchValue.toLowerCase());
   });
+
   return (
     <>
       <Head>
