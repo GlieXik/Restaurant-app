@@ -6,6 +6,8 @@ import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
+import { useContext } from "react";
+import { SearchContext } from "@/components/SearchContext";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -15,6 +17,10 @@ const GridStyled = styled(Grid)(({ theme }) => ({
   },
 }));
 export default function Home({ menu }) {
+  const { searchValue } = useContext(SearchContext);
+  const filteredMenuBySearch = menu.filter((item) => {
+    return item.name.toLowerCase().includes(searchValue.toLowerCase());
+  });
   return (
     <>
       <Head>
@@ -35,7 +41,7 @@ export default function Home({ menu }) {
             <MenuCom menu={menu}></MenuCom>
           </GridStyled>
           <Grid md={6} xs={12} item>
-            <ListMenu menu={menu}></ListMenu>
+            <ListMenu menu={filteredMenuBySearch}></ListMenu>
           </Grid>
           <GridStyled md={3} xs={12} item>
             <InfoPanel></InfoPanel>

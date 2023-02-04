@@ -1,5 +1,6 @@
 import { Layout } from "@/components/Layout/Layout";
 import { LikedContextProvider } from "@/components/LikedContext";
+import { SearchContextProvider } from "@/components/SearchContext";
 
 import "@/styles/globals.scss";
 import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
@@ -19,15 +20,17 @@ export default function App({ Component, pageProps }) {
   }
   return (
     <>
-      <SnackbarProvider maxSnack={3}>
-        <LikedContextProvider>
-          <ThemeProvider theme={theme}>
-            <Layout {...pageProps}>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </LikedContextProvider>
-      </SnackbarProvider>
+      <SearchContextProvider>
+        <SnackbarProvider maxSnack={3}>
+          <LikedContextProvider>
+            <ThemeProvider theme={theme}>
+              <Layout {...pageProps}>
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
+          </LikedContextProvider>
+        </SnackbarProvider>
+      </SearchContextProvider>
     </>
   );
 }

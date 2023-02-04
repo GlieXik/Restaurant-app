@@ -21,6 +21,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { LikedContext } from "../LikedContext";
 import { SwipeableDrawer } from "@mui/material";
 import dynamic from "next/dynamic";
+import { SearchContext } from "../SearchContext";
 const MenuCom = dynamic(() => import("../Menu/Menu"));
 
 const Search = styled("div")(({ theme }) => ({
@@ -68,6 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header = ({ menu }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [mobileDrawer, setMobileDrawer] = useState(null);
+  const { setSearchValue } = useContext(SearchContext);
 
   const { selectedLikes } = useContext(LikedContext);
 
@@ -90,6 +92,9 @@ const Header = ({ menu }) => {
   };
   const handleDrawerClose = () => {
     setMobileDrawer(null);
+  };
+  const handleChangeSearch = (e) => {
+    setSearchValue(e.target.value);
   };
 
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -192,6 +197,7 @@ const Header = ({ menu }) => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={handleChangeSearch}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
@@ -233,7 +239,7 @@ const Header = ({ menu }) => {
       </AppBar>
       {renderMobileMenu}
 
-      {/* {renderMobileDrawer} */}
+      {renderMobileDrawer}
     </Box>
   );
 };
