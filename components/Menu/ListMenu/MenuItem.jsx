@@ -22,7 +22,7 @@ const MenuItem = ({ item }) => {
   } = item;
 
   const [openText, setOpenText] = useState(false);
-
+  const handleToggle = () => setOpenText(!openText);
   return (
     <Card
       key={nanoid()}
@@ -50,7 +50,7 @@ const MenuItem = ({ item }) => {
             >
               {price} грн
             </Typography>
-            <Box onClick={() => setOpenText(!openText)}>
+            <Box onClick={handleToggle}>
               {openText ? (
                 <Typography
                   variant="body2"
