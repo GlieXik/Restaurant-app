@@ -22,7 +22,10 @@ const MenuItem = ({ item }) => {
   } = item;
 
   const [openText, setOpenText] = useState(false);
-  const handleToggle = () => setOpenText(!openText);
+  const handleToggle = (event) => {
+    event.preventDefault();
+    setOpenText(!openText);
+  };
   return (
     <Card
       key={nanoid()}
