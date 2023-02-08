@@ -132,7 +132,9 @@ const MenuItem = ({ item, router }) => {
       </CardContent>
       <Box display={"flex"} gap={2} sx={{ padding: 2, paddingTop: 0 }}>
         <Like like={like} id={_id}></Like>
-        {router.query.tableId && <PlusButton id={_id}></PlusButton>}
+        {router.route == "/[tableId]/cart" || router.route == "/[tableId]" ? (
+          <PlusButton id={_id}></PlusButton>
+        ) : null}
       </Box>
     </Card>
   );

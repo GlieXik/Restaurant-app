@@ -1,7 +1,7 @@
 import Head from "next/head";
 import MenuCom from "@/components/Menu/Menu";
 import Grid from "@mui/material/Grid";
-import { styled, Typography } from "@mui/material";
+import { Box, Button, styled, Typography } from "@mui/material";
 import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongodb";
@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { SearchContext } from "@/components/SearchContext";
 import { useRouter } from "next/router";
 import TablesModel from "@/models/Tables";
+import Link from "next/link";
 
 const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -65,9 +66,12 @@ export default function Home({ menu, tables }) {
         </main>
       ) : (
         <>
-          <Typography variant="h1" textAlign={"center"}>
-            сторінка не валідна
-          </Typography>
+          <Box textAlign={"center"}>
+            <Typography variant="h1">сторінка не валідна</Typography>
+            <Link href="/">
+              <Button variant="contained">На головну сторінку</Button>
+            </Link>
+          </Box>
         </>
       )}
     </>

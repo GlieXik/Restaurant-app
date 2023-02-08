@@ -3,7 +3,7 @@ import { List } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 import { nanoid } from "nanoid";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 
 import { Element } from "react-scroll";
 

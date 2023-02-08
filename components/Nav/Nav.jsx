@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 const Nav = ({ title = "Title" }) => {
   const router = useRouter();
+
   return (
     <Box
       sx={{

@@ -13,7 +13,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Link from "next/link";
@@ -24,6 +23,7 @@ import { SwipeableDrawer } from "@mui/material";
 import dynamic from "next/dynamic";
 import { SearchContext } from "../SearchContext";
 import { useRouter } from "next/router";
+import { CartContext } from "../CartContext";
 const MenuCom = dynamic(() => import("../Menu/Menu"));
 
 const Search = styled("div")(({ theme }) => ({
@@ -58,7 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
+
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -76,6 +76,7 @@ const Header = ({ menu }) => {
   const { setSearchValue } = useContext(SearchContext);
 
   const { selectedLikes } = useContext(LikedContext);
+  const { cart } = useContext(CartContext);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isMobileDrawer = Boolean(mobileDrawer);
@@ -118,7 +119,7 @@ const Header = ({ menu }) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <Link href={{ pathname: "favorite" }}>
+      <Link href={`/${router.query.tableId}/favorite`}>
         <MenuItem onClick={handleMobileMenuClose}>
           <IconButton
             size="large"
@@ -135,14 +136,14 @@ const Header = ({ menu }) => {
       </Link>
 
       {router.asPath !== "/" && (
-        <Link href={`${router.asPath}/cart`}>
+        <Link href={`/${router.query.tableId}/cart`}>
           <MenuItem>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={cart.length} color="error">
                 <ShoppingBasketIcon />
               </Badge>
             </IconButton>
@@ -191,6 +192,7 @@ const Header = ({ menu }) => {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             variant="h6"
             noWrap
@@ -199,6 +201,7 @@ const Header = ({ menu }) => {
           >
             Restaurant
           </Typography>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -229,7 +232,7 @@ const Header = ({ menu }) => {
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
-                  <Badge badgeContent={17} color="error">
+                  <Badge badgeContent={cart.length} color="error">
                     <ShoppingBasketIcon />
                   </Badge>
                 </IconButton>

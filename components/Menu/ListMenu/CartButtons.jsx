@@ -1,17 +1,37 @@
-import { Box, Fab, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useContext } from "react";
 import { CartContext } from "@/components/CartContext";
+import { useSnackbar } from "notistack";
 const PlusButton = ({ id }) => {
-  const { cart, setCart, addToCart, getItemQuantity, deleteFromCart } =
+  const { addToCart, getItemQuantity, deleteFromCart, removeItemFromCart } =
     useContext(CartContext);
-
+  const { enqueueSnackbar } = useSnackbar();
   const handleClickPlus = () => {
     addToCart(id);
+    enqueueSnackbar("Добавлено в корзину!", {
+      variant: "success",
+      autoHideDuration: 2000,
+      anchorOrigin: { vertical: "bottom", horizontal: "right" },
+    });
   };
   const handleClickMinus = () => {
     deleteFromCart(id);
+    enqueueSnackbar("Видалено з корзини!", {
+      variant: "error",
+      autoHideDuration: 2000,
+      anchorOrigin: { vertical: "bottom", horizontal: "right" },
+    });
+  };
+  const handleRemove = () => {
+    removeItemFromCart(id);
+    enqueueSnackbar("Видалено з корзини!", {
+      variant: "error",
+      autoHideDuration: 2000,
+      anchorOrigin: { vertical: "bottom", horizontal: "right" },
+    });
   };
 
   return (
@@ -29,6 +49,9 @@ const PlusButton = ({ id }) => {
               aria-label="minus"
             >
               <RemoveIcon></RemoveIcon>
+            </IconButton>
+            <IconButton variant="outlined" color="error" onClick={handleRemove}>
+              <DeleteOutlineIcon />
             </IconButton>
           </>
         )}

@@ -13,7 +13,6 @@ export const Layout = ({ children, menu }) => {
       <Container fixed className={roboto.className}>
         <Header menu={menu}></Header>
         {children}
-        <footer>Foot</footer>
       </Container>
     </>
   );
