@@ -137,7 +137,7 @@ const Header = ({ menu }) => {
 
       {router.asPath !== "/" && (
         <Link href={`/${router.query.tableId}/cart`}>
-          <MenuItem>
+          <MenuItem onClick={handleMobileMenuClose}>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
