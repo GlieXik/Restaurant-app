@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 
@@ -15,6 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Link from "next/link";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -22,6 +23,7 @@ import { LikedContext } from "../LikedContext";
 import { SwipeableDrawer } from "@mui/material";
 import dynamic from "next/dynamic";
 import { SearchContext } from "../SearchContext";
+import { useRouter } from "next/router";
 const MenuCom = dynamic(() => import("../Menu/Menu"));
 
 const Search = styled("div")(({ theme }) => ({
@@ -67,6 +69,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = ({ menu }) => {
+  const router = useRouter();
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [mobileDrawer, setMobileDrawer] = useState(null);
   const { setSearchValue } = useContext(SearchContext);
@@ -129,18 +133,23 @@ const Header = ({ menu }) => {
           <p>Вподобані</p>
         </MenuItem>
       </Link>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+
+      {router.asPath !== "/" && (
+        <Link href={`${router.asPath}/cart`}>
+          <MenuItem>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <ShoppingBasketIcon />
+              </Badge>
+            </IconButton>
+            <p>Корзина</p>
+          </MenuItem>
+        </Link>
+      )}
     </Menu>
   );
 
@@ -202,7 +211,7 @@ const Header = ({ menu }) => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Link href={{ pathname: "/favorite" }}>
+            <Link href="/favorite">
               <IconButton
                 size="large"
                 aria-label="show 4 new mails"
@@ -213,15 +222,19 @@ const Header = ({ menu }) => {
                 </Badge>
               </IconButton>
             </Link>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            {router.asPath !== "/" && (
+              <Link href={`${router.asPath}/cart`}>
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={17} color="error">
+                    <ShoppingBasketIcon />
+                  </Badge>
+                </IconButton>
+              </Link>
+            )}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

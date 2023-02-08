@@ -8,7 +8,9 @@ import { nanoid } from "nanoid";
 import { convertImage } from "@/utils/convertImage";
 import { toBase64 } from "@/utils/base64";
 import { useState } from "react";
-const MenuItem = ({ item }) => {
+import PlusButton from "./CartButtons";
+
+const MenuItem = ({ item, router }) => {
   const {
     name,
     description,
@@ -26,6 +28,7 @@ const MenuItem = ({ item }) => {
     event.preventDefault();
     setOpenText(!openText);
   };
+
   return (
     <Card
       key={nanoid()}
@@ -112,12 +115,10 @@ const MenuItem = ({ item }) => {
               </>
             )}
           </Box>
-          <Like like={like} id={_id}></Like>
         </Box>
-
         <Box>
           <Image
-            src={image}
+            src={`https://storage.googleapis.com/duplomna_photos/menuImg/${image}`}
             alt="Picture"
             width={120}
             height={90}
@@ -129,6 +130,10 @@ const MenuItem = ({ item }) => {
           />
         </Box>
       </CardContent>
+      <Box display={"flex"} gap={2} sx={{ padding: 2, paddingTop: 0 }}>
+        <Like like={like} id={_id}></Like>
+        {router.query.tableId && <PlusButton id={_id}></PlusButton>}
+      </Box>
     </Card>
   );
 };

@@ -10,8 +10,11 @@ import { Element } from "react-scroll";
 import filteByMenu from "@/utils/filterByMenuCategotyes";
 
 import MenuItem from "./MenuItem";
+import { useRouter } from "next/router";
 
 const ListMenu = ({ menu }) => {
+  const router = useRouter();
+
   const renderMenu = (datas) => {
     return datas.map(({ category, data }) => (
       <Fragment key={nanoid()}>
@@ -33,7 +36,9 @@ const ListMenu = ({ menu }) => {
         </Element>
 
         {data.map((element) => {
-          return <MenuItem item={element} key={nanoid()}></MenuItem>;
+          return (
+            <MenuItem item={element} key={nanoid()} router={router}></MenuItem>
+          );
         })}
       </Fragment>
     ));

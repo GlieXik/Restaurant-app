@@ -1,3 +1,4 @@
+import { CartContextProvider } from "@/components/CartContext";
 import { Layout } from "@/components/Layout/Layout";
 import { LikedContextProvider } from "@/components/LikedContext";
 import { SearchContextProvider } from "@/components/SearchContext";
@@ -23,11 +24,13 @@ export default function App({ Component, pageProps }) {
       <SearchContextProvider>
         <SnackbarProvider maxSnack={3}>
           <LikedContextProvider>
-            <ThemeProvider theme={theme}>
-              <Layout {...pageProps}>
-                <Component {...pageProps} />
-              </Layout>
-            </ThemeProvider>
+            <CartContextProvider>
+              <ThemeProvider theme={theme}>
+                <Layout {...pageProps}>
+                  <Component {...pageProps} />
+                </Layout>
+              </ThemeProvider>
+            </CartContextProvider>
           </LikedContextProvider>
         </SnackbarProvider>
       </SearchContextProvider>
