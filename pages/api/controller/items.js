@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
-
+dbConnect();
 async function deleteItem(id) {
   const results = await MenuModel.deleteOne({ _id: id });
 
@@ -16,7 +16,6 @@ export async function addItem(data) {
 }
 
 export default async function itemsCrud(req, res) {
-  await dbConnect();
   const { id } = req.query;
   const body = req.body;
 
