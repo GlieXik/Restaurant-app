@@ -16,9 +16,8 @@ let theme = createTheme({
 });
 theme = responsiveFontSizes(theme);
 export default function App({ Component, pageProps }) {
-  if (Component.getLayout) {
-    return Component.getLayout(<Component {...pageProps}></Component>);
-  }
+  const LayoutExtra = Component.Layout || Layout;
+
   return (
     <>
       <SearchContextProvider>
@@ -26,9 +25,9 @@ export default function App({ Component, pageProps }) {
           <LikedContextProvider>
             <CartContextProvider>
               <ThemeProvider theme={theme}>
-                <Layout {...pageProps}>
+                <LayoutExtra {...pageProps}>
                   <Component {...pageProps} />
-                </Layout>
+                </LayoutExtra>
               </ThemeProvider>
             </CartContextProvider>
           </LikedContextProvider>
