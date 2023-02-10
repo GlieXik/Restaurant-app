@@ -7,9 +7,7 @@ async function deleteItem(id) {
   return results;
 }
 async function updateItem(id, update) {
-  const results = await MenuModel.findByIdAndUpdate(id, update, {
-    new: true,
-  });
+  const results = await MenuModel.findByIdAndUpdate(id, update);
   return results;
 }
 async function addItem(data) {

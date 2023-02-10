@@ -40,7 +40,7 @@ const Updete = ({ item }) => {
       weigth: data.get("weigth"),
       persent_alcho: data.get("persent_alcho"),
     };
-
+    console.log(newData);
     await axios.put(`/api/controller/items?id=${item._id}`, newData);
     router.back();
   };
@@ -163,10 +163,10 @@ const Updete = ({ item }) => {
                     convertImage(120, 90)
                   )}`}
                 />
+                <Button variant="contained" type="submit">
+                  Підтвердити
+                </Button>
               </Box>
-              <Button variant="contained" type="submit">
-                Підтвердити
-              </Button>
             </Paper>
           </Grid>
         </Grid>
