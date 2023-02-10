@@ -12,57 +12,38 @@ import {
   TextField,
 } from "@mui/material";
 import { Container } from "@mui/system";
+import axios from "axios";
+import Image from "next/image";
 
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 const Add = () => {
   const [type, setType] = useState("Кухня");
-
+  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedFile, setSelectedFile] = useState();
   const router = useRouter();
+
   const handleChange = (event) => {
     setType(event.target.value);
   };
 
-  const uploadPhoto = async (e) => {
-    const file = e.target.files[0];
-    const filename = encodeURIComponent(file.name);
-    const res = await fetch(`/api/controller/items?file=${filename}`, {
-      method: "POST",
-    });
-    const { url, fields } = await res.json();
-    const formData = new FormData();
-
-    Object.entries({ ...fields, file }).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-
-    const upload = await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (upload.ok) {
-      console.log("Uploaded successfully!");
-    } else {
-      console.error("Upload failed.");
+  const uploadPhoto = async ({ target }) => {
+    if (target.files) {
+      const file = target.files[0];
+      setSelectedImage(URL.createObjectURL(file));
+      setSelectedFile(file);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData(e.currentTarget);
+    if (!selectedFile) return;
+    const formData = new FormData(e.target);
+    formData.append("myImage", selectedFile);
 
-    // const newData = {
-    //   name: data.get("name"),
-    //   category: data.get("category"),
-    //   type: data.get("type"),
-    //   price: data.get("price"),
-    //   description: data.get("description"),
-    //   weigth: data.get("weigth"),
-    //   persent_alcho: data.get("persent_alcho"),
-    // };
+    const data = await axios.post("/api/addPhoto", formData);
   };
 
   return (
@@ -183,10 +164,15 @@ const Add = () => {
                     Upload button
                   </Button>
                 </label>
+                {selectedImage ? (
+                  <Image src={selectedImage} alt="" width={120} height={80} />
+                ) : (
+                  <span>Select Image</span>
+                )}
+                <Button variant="contained" type="submit">
+                  Підтвердити
+                </Button>
               </Box>
-              <Button variant="contained" type="submit">
-                Підтвердити
-              </Button>
             </Paper>
           </Grid>
         </Grid>

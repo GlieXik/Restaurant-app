@@ -2,9 +2,10 @@ import ItemCard from "@/components/Admin/ItemCard";
 import AdminLayout from "@/components/Layout/AdminLayout";
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
-import { Container, Fab, Grid, Paper, Toolbar } from "@mui/material";
+import { Container, Fab, Grid, Paper } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
+import Link from "next/link";
 
 const Menu = ({ menu }) => {
   return (
@@ -28,13 +29,15 @@ const Menu = ({ menu }) => {
           </Grid>
         </Grid>
       </Container>
-      <Fab
-        color="primary"
-        aria-label="add"
-        sx={{ position: "absolute", bottom: 20, right: 20 }}
-      >
-        <AddIcon />
-      </Fab>
+      <Link href="menu/add">
+        <Fab
+          color="primary"
+          aria-label="add"
+          sx={{ position: "absolute", bottom: 20, right: 20 }}
+        >
+          <AddIcon />
+        </Fab>
+      </Link>
     </>
   );
 };
