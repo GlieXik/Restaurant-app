@@ -41,8 +41,8 @@ const Updete = ({ item }) => {
       persent_alcho: data.get("persent_alcho"),
     };
     console.log(newData);
-    await axios.put(`/api/controller/items?id=${item._id}`, newData);
     router.back();
+    await axios.put(`/api/controller/items?id=${item._id}`, newData);
   };
 
   return (
