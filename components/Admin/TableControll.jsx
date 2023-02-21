@@ -6,7 +6,7 @@ import PrintIcon from "@mui/icons-material/Print";
 
 import QRCode from "qrcode.react";
 import { useEffect, useState, useRef } from "react";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+import { useReactToPrint } from "react-to-print";
 import axios from "axios";
 const TableControll = ({ tables, setTablesState }) => {
   const [baseUrl, setBaseUrl] = useState(null);
