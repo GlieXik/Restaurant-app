@@ -1,4 +1,3 @@
-import * as React from "react";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -10,42 +9,78 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
-export const mainListItems = (
-  <React.Fragment>
-    <Link href="/admin">
+export const MainListItems = () => {
+  const [role, setRole] = useState("");
+  const { data, status } = useSession();
+  useEffect(() => {
+    if (status === "authenticated") {
+      console.log(data, status);
+      setRole(data.user.role);
+    }
+  }, [data, status]);
+  return (
+    <>
+      <Link href="/admin">
+        <ListItemButton>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </ListItemButton>
+      </Link>
+
       <ListItemButton>
         <ListItemIcon>
-          <DashboardIcon />
+          <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Dashboard" />
+        <ListItemText primary="Замовлення" />
       </ListItemButton>
-    </Link>
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <Link href="/admin/menu">
+
       <ListItemButton>
         <ListItemIcon>
-          <BarChartIcon />
+          <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Menu" />
+        <ListItemText primary="Кухня" />
       </ListItemButton>
-    </Link>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
-  </React.Fragment>
-);
+
+      <ListItemButton>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Бар" />
+      </ListItemButton>
+
+      {role === "admin" && (
+        <>
+          <Link href="/admin/menu">
+            <ListItemButton>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Menu" />
+            </ListItemButton>
+          </Link>
+          <Link href="/admin/people">
+            <ListItemButton>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="People" />
+            </ListItemButton>
+          </Link>
+          <Link href="/admin/tables">
+            <ListItemButton>
+              <ListItemIcon>
+                <LayersIcon />
+              </ListItemIcon>
+              <ListItemText primary="Tables" />
+            </ListItemButton>
+          </Link>
+        </>
+      )}
+    </>
+  );
+};

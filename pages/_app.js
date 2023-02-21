@@ -5,6 +5,7 @@ import { SearchContextProvider } from "@/components/SearchContext";
 
 import "@/styles/globals.scss";
 import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
+
 import { SnackbarProvider } from "notistack";
 let theme = createTheme({
   typography: {

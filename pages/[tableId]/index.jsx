@@ -8,7 +8,7 @@ import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
 import { useContext } from "react";
 import { SearchContext } from "@/components/SearchContext";
-import { useRouter } from "next/router";
+
 import TablesModel from "@/models/Tables";
 import Link from "next/link";
 
@@ -26,11 +26,8 @@ export default function Home({ menu, tables }) {
     return item.name.toLowerCase().includes(searchValue.toLowerCase());
   });
 
-  const router = useRouter();
-  const tableId = router.query.tableId;
-
   const activeTable = () => {
-    return tables.includes(tableId);
+    return tables.some((e) => e.url);
   };
 
   return (
@@ -78,18 +75,19 @@ export default function Home({ menu, tables }) {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps({ resolvedUrl }) {
   try {
     await dbConnect();
-
+    console.log(resolvedUrl);
     const results = await MenuModel.find({});
-    const table = await TablesModel.find({});
-    const tavblesArr = table.map((e) => e.tables);
+    const table = await TablesModel.find({ url: resolvedUrl });
+    console.log(table);
+
     const sortMenu = results.sort((a, b) => (a.category > b.category ? 1 : -1));
     return {
       props: {
         menu: JSON.parse(JSON.stringify(sortMenu)),
-        tables: JSON.parse(JSON.stringify(tavblesArr[0])),
+        tables: JSON.parse(JSON.stringify(table)),
       },
     };
   } catch (error) {

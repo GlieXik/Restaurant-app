@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
-import Link from "@mui/material/Link";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -18,12 +18,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import Box from "@mui/material/Box";
 
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-
-import { mainListItems } from "@/components/Admin/ListItem";
+import { MainListItems } from "@/components/Admin/ListItem";
 import { useState } from "react";
+import { SessionProvider } from "next-auth/react";
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -70,83 +67,89 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 const mdTheme = createTheme();
+
 const AdminLayout = ({ children }) => {
   const [open, setOpen] = useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
   return (
     <>
-      <ThemeProvider theme={mdTheme}>
-        <Box sx={{ display: "flex" }}>
-          <CssBaseline />
-          <AppBar position="absolute" open={open}>
-            <Toolbar
-              sx={{
-                pr: "24px", // keep right padding when drawer closed
-              }}
-            >
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={toggleDrawer}
+      <SessionProvider>
+        <ThemeProvider theme={mdTheme}>
+          <Box sx={{ display: "flex" }}>
+            <CssBaseline />
+            <AppBar position="absolute" open={open}>
+              <Toolbar
                 sx={{
-                  marginRight: "36px",
-                  ...(open && { display: "none" }),
+                  pr: "24px", // keep right padding when drawer closed
                 }}
               >
-                <MenuIcon />
-              </IconButton>
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                sx={{ flexGrow: 1 }}
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={toggleDrawer}
+                  sx={{
+                    marginRight: "36px",
+                    ...(open && { display: "none" }),
+                  }}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Typography
+                  component="h1"
+                  variant="h6"
+                  color="inherit"
+                  noWrap
+                  sx={{ flexGrow: 1 }}
+                >
+                  Dashboard
+                </Typography>
+                <IconButton color="inherit">
+                  <Badge badgeContent={4} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+              </Toolbar>
+            </AppBar>
+            <Drawer variant="permanent" open={open}>
+              <Toolbar
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                  px: [1],
+                }}
               >
-                Dashboard
-              </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <Drawer variant="permanent" open={open}>
-            <Toolbar
+                <IconButton onClick={toggleDrawer}>
+                  <ChevronLeftIcon />
+                </IconButton>
+              </Toolbar>
+              <Divider />
+              <List component="nav">
+                <MainListItems></MainListItems>
+              </List>
+            </Drawer>
+            <Box
+              component="main"
               sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                px: [1],
+                backgroundColor: (theme) =>
+                  theme.palette.mode === "light"
+                    ? theme.palette.grey[100]
+                    : theme.palette.grey[900],
+                flexGrow: 1,
+                height: "100vh",
+                overflow: "auto",
               }}
             >
-              <IconButton onClick={toggleDrawer}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </Toolbar>
-            <Divider />
-            <List component="nav">{mainListItems}</List>
-          </Drawer>
-          <Box
-            component="main"
-            sx={{
-              backgroundColor: (theme) =>
-                theme.palette.mode === "light"
-                  ? theme.palette.grey[100]
-                  : theme.palette.grey[900],
-              flexGrow: 1,
-              height: "100vh",
-              overflow: "auto",
-            }}
-          >
-            <Toolbar />
-            {children}
+              <Toolbar />
+              {children}
+            </Box>
           </Box>
-        </Box>
-      </ThemeProvider>
+        </ThemeProvider>
+      </SessionProvider>
     </>
   );
 };

@@ -11,20 +11,23 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
+import { signIn } from "next-auth/react";
+import Router from "next/router";
 const Login = () => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+
+    const { ok } = await signIn("credentials", {
       email: data.get("email"),
       password: data.get("password"),
+      redirect: false,
     });
+    if (ok) Router.replace("/admin");
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
