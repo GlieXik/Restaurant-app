@@ -1,4 +1,5 @@
 import AdminLayout from "@/components/Layout/AdminLayout";
+import { LoadingButton } from "@mui/lab";
 
 import {
   Box,
@@ -22,6 +23,8 @@ const Add = () => {
   const [type, setType] = useState("Кухня");
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState();
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
   const handleChange = (event) => {
@@ -38,12 +41,15 @@ const Add = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!selectedFile) return;
     const formData = new FormData(e.target);
     formData.append("myImage", selectedFile);
-
     const data = await axios.post("/api/addPhoto", formData);
+
+    setLoading(false);
+    router.back();
   };
 
   return (
@@ -169,9 +175,17 @@ const Add = () => {
                 ) : (
                   <span>Select Image</span>
                 )}
-                <Button variant="contained" type="submit">
-                  Підтвердити
-                </Button>
+
+                <LoadingButton
+                  type="submit"
+                  sx={{ mt: 3, mb: 2 }}
+                  fullWidth
+                  loading={loading}
+                  loadingIndicator="Loading…"
+                  variant="contained"
+                >
+                  <span>Підтвердити</span>
+                </LoadingButton>
               </Box>
             </Paper>
           </Grid>
