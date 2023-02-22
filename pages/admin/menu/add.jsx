@@ -141,7 +141,7 @@ const Add = () => {
                   />
                   <TextField
                     id="outlined-number"
-                    label="Процент алкоголю"
+                    label="Відсоток алкоголю"
                     type="number"
                     name="persent_alcho"
                   />

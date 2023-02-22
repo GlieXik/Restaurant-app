@@ -12,6 +12,7 @@ import MuiDrawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -21,6 +22,7 @@ import Box from "@mui/material/Box";
 import { MainListItems } from "@/components/Admin/ListItem";
 import { useState } from "react";
 import { SessionProvider } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -107,10 +109,8 @@ const AdminLayout = ({ children }) => {
                 >
                   Dashboard
                 </Typography>
-                <IconButton color="inherit">
-                  <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                  </Badge>
+                <IconButton color="inherit" onClick={() => signOut()}>
+                  <LogoutIcon />
                 </IconButton>
               </Toolbar>
             </AppBar>

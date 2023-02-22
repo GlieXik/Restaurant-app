@@ -145,7 +145,7 @@ const Updete = ({ item }) => {
                   />
                   <TextField
                     id="outlined-number"
-                    label="Процент алкоголю"
+                    label="Відсоток алкоголю"
                     type="number"
                     name="persent_alcho"
                     defaultValue={item.persent_alcho}

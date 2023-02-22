@@ -13,17 +13,21 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { signIn } from "next-auth/react";
 import Router from "next/router";
+import { useState } from "react";
 const Login = () => {
+  const [error, setError] = useState();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const { ok } = await signIn("credentials", {
+    const { ok, error } = await signIn("credentials", {
       email: data.get("email"),
       password: data.get("password"),
       redirect: false,
     });
+
     if (ok) Router.replace("/admin");
+    if (error) setError(error);
   };
 
   return (
@@ -63,10 +67,7 @@ const Login = () => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          <Typography color="error">{error}</Typography>
           <Button
             type="submit"
             fullWidth

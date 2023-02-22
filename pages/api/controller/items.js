@@ -1,9 +1,23 @@
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
+const { Storage } = require("@google-cloud/storage");
 dbConnect();
-async function deleteItem(id) {
-  const results = await MenuModel.deleteOne({ _id: id });
 
+const storage = new Storage();
+
+async function deleteFile(fileName) {
+  await storage
+    .bucket(process.env.BUCKET_NAME)
+    .file("menuImg/" + fileName)
+    .delete();
+
+  console.log(`gs://${process.env.BUCKET_NAME}/menuImg/${fileName} deleted`);
+}
+
+async function deleteItem(id, data) {
+  const results = await MenuModel.deleteOne({ _id: id });
+  console.log(data.image);
+  await deleteFile(data.image);
   return results;
 }
 async function updateItem(id, update) {
@@ -21,7 +35,7 @@ export default async function itemsCrud(req, res) {
 
   try {
     if (req.method === "DELETE") {
-      await deleteItem(id);
+      await deleteItem(id, body);
       res.status(202).json({ message: "deleted" });
     } else if (req.method === "PUT") {
       await updateItem(id, body);

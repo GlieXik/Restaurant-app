@@ -19,12 +19,13 @@ import Link from "next/link";
 const ItemCard = ({ menu }) => {
   const [data, setData] = useState(menu);
 
-  const handelDelete = async (id) => {
+  const handelDelete = async (id, image) => {
     const delFromState = setData((prev) =>
       prev.filter((item) => item._id !== id)
     );
     const deletesAPI = await axios.delete("/api/controller/items", {
       params: { id },
+      data: { image },
     });
   };
 
@@ -102,7 +103,7 @@ const ItemCard = ({ menu }) => {
             <Link href={`menu/${_id}`}>
               <Button size="small">Update</Button>
             </Link>
-            <Button size="small" onClick={() => handelDelete(_id)}>
+            <Button size="small" onClick={() => handelDelete(_id, image)}>
               Delete
             </Button>
           </CardActions>

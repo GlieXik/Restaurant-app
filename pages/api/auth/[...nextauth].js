@@ -17,11 +17,11 @@ const authOptions = {
 
         const user = await UserModel.findOne({ email });
         if (!user) {
-          throw new Error("invalid Email or Pass");
+          throw new Error("Invalid Email or Pass");
         }
         const isPassMatcher = await bcrypt.compare(password, user.password);
         if (!isPassMatcher) {
-          throw new Error("invalid Email or Pass");
+          throw new Error("Invalid Email or Pass");
         }
 
         return user;

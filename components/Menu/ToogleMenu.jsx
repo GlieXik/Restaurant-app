@@ -46,6 +46,7 @@ const ToogleMenu = ({ type, categories, closeDrawer }) => {
         );
     }
   };
+  console.log(categories);
   return (
     <>
       <ListItemButton
@@ -71,9 +72,6 @@ const ToogleMenu = ({ type, categories, closeDrawer }) => {
                 onClick={closeDrawer}
               >
                 <ListItemButton sx={{ pl: 11, borderRadius: 1 }}>
-                  {/* <FiberManualRecordIcon
-                    sx={{ width: 8, position: "absolute", left: 80 }}
-                  ></FiberManualRecordIcon> */}
                   <ListItemText primary={category} />
                 </ListItemButton>
               </Link>

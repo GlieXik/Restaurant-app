@@ -7,7 +7,10 @@ const filterArray = (array) => {
 
   array.forEach(({ type, category }) => {
     result.forEach((item, index) => {
-      if (item.type === type && !item.categories.includes(category))
+      if (
+        item.type === type &&
+        !item.categories.includes(capitalizeFirstLetter(category))
+      )
         result[index].categories.push(category);
     });
   });
@@ -17,4 +20,8 @@ const filterArray = (array) => {
 
   return result;
 };
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 export default filterArray;
