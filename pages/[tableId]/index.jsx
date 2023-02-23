@@ -6,7 +6,7 @@ import ListMenu from "@/components/Menu/ListMenu/ListMenu";
 import InfoPanel from "@/components/InfoPanel/InfoPanel";
 import dbConnect from "@/lib/mongodb";
 import MenuModel from "@/models/Menu";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SearchContext } from "@/components/SearchContext";
 
 import TablesModel from "@/models/Tables";
@@ -22,12 +22,16 @@ const GridStyled = styled(Grid)(({ theme }) => ({
 export default function Home({ menu, tables }) {
   const { searchValue } = useContext(SearchContext);
 
+  const [tableId, setTableId] = useState();
+
   const filteredMenuBySearch = menu.filter((item) => {
     return item.name.toLowerCase().includes(searchValue.toLowerCase());
   });
 
   const activeTable = () => {
-    return tables.some((e) => e.url);
+    return tables.some((e) => {
+      return e.url;
+    });
   };
 
   return (
@@ -78,10 +82,9 @@ export default function Home({ menu, tables }) {
 export async function getServerSideProps({ resolvedUrl }) {
   try {
     await dbConnect();
-    console.log(resolvedUrl);
+
     const results = await MenuModel.find({});
     const table = await TablesModel.find({ url: resolvedUrl });
-    console.log(table);
 
     const sortMenu = results.sort((a, b) => (a.category > b.category ? 1 : -1));
     return {

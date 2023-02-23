@@ -46,7 +46,7 @@ const ToogleMenu = ({ type, categories, closeDrawer }) => {
         );
     }
   };
-  console.log(categories);
+
   return (
     <>
       <ListItemButton

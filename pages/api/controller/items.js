@@ -11,12 +11,12 @@ async function deleteFile(fileName) {
     .file("menuImg/" + fileName)
     .delete();
 
-  console.log(`gs://${process.env.BUCKET_NAME}/menuImg/${fileName} deleted`);
+  console.log(`deleted`);
 }
 
 async function deleteItem(id, data) {
   const results = await MenuModel.deleteOne({ _id: id });
-  console.log(data.image);
+
   await deleteFile(data.image);
   return results;
 }

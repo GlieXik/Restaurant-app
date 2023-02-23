@@ -17,7 +17,6 @@ export const MainListItems = () => {
   const { data, status } = useSession();
   useEffect(() => {
     if (status === "authenticated") {
-      console.log(data, status);
       setRole(data.user.role);
     }
   }, [data, status]);
@@ -31,13 +30,6 @@ export const MainListItems = () => {
           <ListItemText primary="Dashboard" />
         </ListItemButton>
       </Link>
-
-      <ListItemButton>
-        <ListItemIcon>
-          <ShoppingCartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Замовлення" />
-      </ListItemButton>
 
       <ListItemButton>
         <ListItemIcon>
@@ -77,6 +69,14 @@ export const MainListItems = () => {
                 <LayersIcon />
               </ListItemIcon>
               <ListItemText primary="Tables" />
+            </ListItemButton>
+          </Link>
+          <Link href="/admin/orders">
+            <ListItemButton>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Замовлення" />
             </ListItemButton>
           </Link>
         </>

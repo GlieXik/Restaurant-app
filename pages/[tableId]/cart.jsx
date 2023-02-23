@@ -9,13 +9,20 @@ import { useContext } from "react";
 import Nav from "@/components/Nav/Nav";
 import { CartContext } from "@/components/CartContext";
 import { SearchContext } from "@/components/SearchContext";
+import { useRouter } from "next/router";
+import axios from "axios";
+
+import TablesModel from "@/models/Tables";
 
 const ListMenu = dynamic(() => import("@/components/Menu/ListMenu/ListMenu"), {
   loading: () => <Loader></Loader>,
   ssr: false,
 });
-const Cart = ({ menu }) => {
+
+const Cart = ({ menu, table }) => {
   const { cart } = useContext(CartContext);
+  const { searchValue } = useContext(SearchContext);
+  const router = useRouter();
 
   const filterCart = () => {
     const cartItems = [];
@@ -36,11 +43,35 @@ const Cart = ({ menu }) => {
 
     return accumulator + (item?.price || 0) * menuItem.quantity;
   }, 0);
-  const { searchValue } = useContext(SearchContext);
 
   const filteredMenuBySearch = filterCart().filter((item) => {
     return item.name.toLowerCase().includes(searchValue.toLowerCase());
   });
+
+  const onCash = async () => {
+    const order = {
+      tableId: table.tableNumber,
+      order: cart,
+      payment: "Готівка",
+      status: 0,
+      totalPrice,
+    };
+    const { data } = await axios.post("/api/controller/order/orders", {
+      ...order,
+    });
+  };
+  const onCard = async () => {
+    const order = {
+      tableId: table.tableNumber,
+      order: cart,
+      payment: "Карта",
+      status: 0,
+      totalPrice,
+    };
+    const { data } = await axios.post("/api/controller/order/orders", {
+      ...order,
+    });
+  };
   return (
     <>
       <Grid
@@ -73,10 +104,15 @@ const Cart = ({ menu }) => {
                       variant="outlined"
                       sx={{ marginBottom: 1 }}
                       fullWidth={true}
+                      onClick={onCash}
                     >
                       Готівка
                     </Button>
-                    <Button variant="outlined" fullWidth={true}>
+                    <Button
+                      variant="outlined"
+                      fullWidth={true}
+                      onClick={onCard}
+                    >
                       Карта
                     </Button>
                   </Box>
@@ -92,15 +128,19 @@ const Cart = ({ menu }) => {
 
 export default Cart;
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps({ query }) {
   try {
     await dbConnect();
 
     const results = await MenuModel.find({});
+    const table = await TablesModel.findOne({
+      url: "/" + query.tableId,
+    });
     const sortMenu = results.sort((a, b) => (a.category > b.category ? 1 : -1));
     return {
       props: {
         menu: JSON.parse(JSON.stringify(sortMenu)),
+        table: JSON.parse(JSON.stringify(table)),
       },
     };
   } catch (error) {

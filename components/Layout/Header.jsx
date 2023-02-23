@@ -226,7 +226,7 @@ const Header = ({ menu }) => {
               </IconButton>
             </Link>
             {router.asPath !== "/" && (
-              <Link href={`${router.asPath}/cart`}>
+              <Link href={`/${router.query.tableId}/cart`}>
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
