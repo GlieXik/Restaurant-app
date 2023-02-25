@@ -7,7 +7,7 @@ import OrderModel from "@/models/Order";
 import { Container, Grid, Paper } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 
 // import dynamic from "next/dynamic";
 
