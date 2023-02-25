@@ -9,12 +9,18 @@ import { Container, Grid, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 
+// import dynamic from "next/dynamic";
+
+// const SocketIOClient = dynamic(() => import("socket.io-client"), {
+//   ssr: false,
+// });
+let socket;
 const AllOrders = ({ orders, menu }) => {
   const [ordersState, setOrdersState] = useState(orders);
 
   const socketInitializer = async () => {
     await fetch("/api/orderSocket");
-    const socket = io();
+    socket = io();
     socket.on("connected", () => {
       console.log("connected");
     });
