@@ -5,34 +5,21 @@ import MenuModel from "@/models/Menu";
 import OrderModel from "@/models/Order";
 
 import { Container, Grid, Paper } from "@mui/material";
+import axios from "axios";
 
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 
-// import dynamic from "next/dynamic";
-
-// const SocketIOClient = dynamic(() => import("socket.io-client"), {
-//   ssr: false,
-// });
-let socket;
 const AllOrders = ({ orders, menu }) => {
   const [ordersState, setOrdersState] = useState(orders);
 
-  const socketInitializer = async () => {
-    await fetch("/api/orderSocket");
-    socket = io();
-    socket.on("connected", () => {
-      console.log("connected");
-    });
-    socket.on("change", (e) => {
-      console.log(e.fullDocument);
-      setOrdersState((prev) => [...prev, e.fullDocument]);
-    });
-    return null;
-  };
-
   useEffect(() => {
-    socketInitializer();
+    const interval = setInterval(async () => {
+      const res = await axios("/api/orderSocket");
+
+      setOrdersState(res.data);
+    }, 4000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const renameIds = menu.map((item) => {
@@ -74,8 +61,8 @@ export async function getServerSideProps(ctx) {
     await dbConnect();
 
     const menu = await MenuModel.find();
-    const results = await OrderModel.find();
 
+    const results = await OrderModel.find().sort({ createdAt: -1 });
     return {
       props: {
         menu: JSON.parse(JSON.stringify(menu)),
