@@ -4,7 +4,7 @@ import MenuModel from "@/models/Menu";
 import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import Nav from "@/components/Nav/Nav";
 import { CartContext } from "@/components/CartContext";
@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 import TablesModel from "@/models/Tables";
+import SuccessModal from "@/components/Modal/ModalSuccesBuy";
 
 const ListMenu = dynamic(() => import("@/components/Menu/ListMenu/ListMenu"), {
   loading: () => <Loader></Loader>,
@@ -20,6 +21,7 @@ const ListMenu = dynamic(() => import("@/components/Menu/ListMenu/ListMenu"), {
 });
 
 const Cart = ({ menu, table }) => {
+  const [showModal, setShowModal] = useState(false);
   const { cart } = useContext(CartContext);
   const { searchValue } = useContext(SearchContext);
   const router = useRouter();
@@ -59,6 +61,7 @@ const Cart = ({ menu, table }) => {
     const { data } = await axios.post("/api/controller/order/orders", {
       ...order,
     });
+    setShowModal(true);
   };
   const onCard = async () => {
     const order = {
@@ -71,6 +74,7 @@ const Cart = ({ menu, table }) => {
     const { data } = await axios.post("/api/controller/order/orders", {
       ...order,
     });
+    setShowModal(true);
   };
   return (
     <>
@@ -122,6 +126,7 @@ const Cart = ({ menu, table }) => {
           </>
         </Grid>
       </Grid>
+      {showModal && <SuccessModal />}
     </>
   );
 };
