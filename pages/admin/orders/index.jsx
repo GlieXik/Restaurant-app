@@ -28,6 +28,7 @@ const AllOrders = ({ orders, menu }) => {
       console.log(e.fullDocument);
       setOrdersState((prev) => [...prev, e.fullDocument]);
     });
+    return null;
   };
 
   useEffect(() => {
