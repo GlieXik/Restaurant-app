@@ -7,6 +7,8 @@ const statusOrder = (stan) => {
       return "Готується";
     case 2:
       return "Готово";
+    case 3:
+      return "Оплачено";
     default:
       break;
   }

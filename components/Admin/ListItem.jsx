@@ -30,20 +30,14 @@ export const MainListItems = () => {
           <ListItemText primary="Dashboard" />
         </ListItemButton>
       </Link>
-
-      <ListItemButton>
-        <ListItemIcon>
-          <ShoppingCartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Кухня" />
-      </ListItemButton>
-
-      <ListItemButton>
-        <ListItemIcon>
-          <ShoppingCartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Бар" />
-      </ListItemButton>
+      <Link href="/admin/orders/cookers">
+        <ListItemButton>
+          <ListItemIcon>
+            <ShoppingCartIcon />
+          </ListItemIcon>
+          <ListItemText primary="Кухня" />
+        </ListItemButton>
+      </Link>
 
       {role === "admin" && (
         <>
