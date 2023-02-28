@@ -9,7 +9,7 @@ import { useContext, useState } from "react";
 import Nav from "@/components/Nav/Nav";
 import { CartContext } from "@/components/CartContext";
 import { SearchContext } from "@/components/SearchContext";
-import { useRouter } from "next/router";
+
 import axios from "axios";
 
 import TablesModel from "@/models/Tables";
@@ -24,7 +24,6 @@ const Cart = ({ menu, table }) => {
   const [showModal, setShowModal] = useState(false);
   const { cart } = useContext(CartContext);
   const { searchValue } = useContext(SearchContext);
-  const router = useRouter();
 
   const filterCart = () => {
     const cartItems = [];

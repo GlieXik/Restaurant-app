@@ -6,10 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
+
 import { Typography } from "@mui/material";
-import statusOrder from "@/utils/statusOrder";
+
 import { CircleIcon } from "@/components/Admin/OrdersTables/statusOrderStyled";
 import SwitcherStatus from "./SwitcherStatus";
 const CookersTable = ({ orders }) => {

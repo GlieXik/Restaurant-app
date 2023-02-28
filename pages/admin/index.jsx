@@ -1,4 +1,8 @@
+import Chart from "@/components/Admin/Chart";
+import EarnMoney from "@/components/Admin/EarnMoney";
 import AdminLayout from "@/components/Layout/AdminLayout";
+import dbConnect from "@/lib/mongodb";
+import OrderModel from "@/models/Order";
 
 import Box from "@mui/material/Box";
 
@@ -6,7 +10,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
-function DashboardContent() {
+const Admin = ({ suma, orders }) => {
   return (
     <>
       <Box
@@ -30,29 +34,23 @@ function DashboardContent() {
                   p: 2,
                   display: "flex",
                   flexDirection: "column",
-                  height: 240,
+                  maxHeight: 500,
                 }}
               >
-                {/* <Chart /> */}
+                <Chart orders={orders} />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
+
             <Grid item xs={12} md={4} lg={3}>
               <Paper
                 sx={{
                   p: 2,
                   display: "flex",
                   flexDirection: "column",
-                  height: 240,
+                  height: 150,
                 }}
               >
-                {/* <Deposits /> */}
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                {/* <Orders /> */}
+                <EarnMoney suma={suma} />
               </Paper>
             </Grid>
           </Grid>
@@ -60,10 +58,27 @@ function DashboardContent() {
       </Box>
     </>
   );
-}
-
-const Admin = () => {
-  return <DashboardContent />;
 };
+
 export default Admin;
 Admin.Layout = AdminLayout;
+export async function getServerSideProps(ctx) {
+  try {
+    await dbConnect();
+
+    const results = await OrderModel.find({ status: 3 });
+    const suma = results.reduce((acc, value) => {
+      return acc + value.totalPrice;
+    }, 0);
+
+    return {
+      props: {
+        orders: JSON.parse(JSON.stringify(results)),
+        suma: suma.toLocaleString(),
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return { notFound: true };
+  }
+}
