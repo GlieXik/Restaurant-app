@@ -15,7 +15,8 @@ const authOptions = {
         dbConnect();
         const { email, password } = credentials;
 
-        const user = await UserModel.findOne({ email });
+        const user = await UserModel.findOne({ email: email.toLowerCase() });
+
         if (!user) {
           throw new Error("Invalid Email or Pass");
         }

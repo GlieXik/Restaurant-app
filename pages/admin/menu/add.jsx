@@ -6,6 +6,7 @@ import {
   Button,
   FormControl,
   Grid,
+  IconButton,
   InputLabel,
   MenuItem,
   Paper,
@@ -18,6 +19,8 @@ import Image from "next/image";
 
 import { useRouter } from "next/router";
 import { useState } from "react";
+
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 const Add = () => {
   const [type, setType] = useState("Кухня");
@@ -152,30 +155,45 @@ const Add = () => {
                     name="persent_alcho"
                   />
                 </Box>
-                <label htmlFor="upload-photo">
-                  <input
-                    style={{ display: "none" }}
-                    onChange={uploadPhoto}
-                    id="upload-photo"
-                    name="image"
-                    type="file"
-                    accept="image/jpeg"
-                  />
-
-                  <Button
-                    color="secondary"
-                    variant="contained"
-                    component="span"
+                <Box>
+                  <Box
+                    sx={{
+                      border: "1px solid rgba(0, 0, 0, 0.27)",
+                      borderRadius: 1,
+                      width: 240,
+                      height: 180,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                   >
-                    Upload button
-                  </Button>
-                </label>
-                {selectedImage ? (
-                  <Image src={selectedImage} alt="" width={120} height={80} />
-                ) : (
-                  <span>Select Image</span>
-                )}
-
+                    {selectedImage ? (
+                      <Image
+                        src={selectedImage}
+                        alt=""
+                        width={240}
+                        height={180}
+                        style={{ borderRadius: "0.2rem", objectFit: "cover" }}
+                      />
+                    ) : (
+                      <Box>
+                        <IconButton
+                          color="primary"
+                          aria-label="upload picture"
+                          component="label"
+                        >
+                          <input
+                            hidden
+                            accept="image/*"
+                            type="file"
+                            onChange={uploadPhoto}
+                          />
+                          <PhotoCamera />
+                        </IconButton>
+                      </Box>
+                    )}
+                  </Box>
+                </Box>
                 <LoadingButton
                   type="submit"
                   sx={{ mt: 3, mb: 2 }}

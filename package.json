@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.120",
     "@mui/material": "^5.11.4",
+    "@next/bundle-analyzer": "^13.2.1",
     "@next/font": "13.1.2",
     "@pulumi/gcp": "^6.49.0",
     "@pulumi/pulumi": "^3.54.0",

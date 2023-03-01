@@ -157,7 +157,8 @@ const Updete = ({ item }) => {
                   alt="Picture"
                   width={120}
                   height={90}
-                  style={{ borderRadius: "0.2rem" }}
+                  style={{borderRadius: "0.2rem" , objectFit: "cover" }}
+
                   placeholder="blur"
                   blurDataURL={`data:image/svg+xml;base64,${toBase64(
                     convertImage(120, 90)

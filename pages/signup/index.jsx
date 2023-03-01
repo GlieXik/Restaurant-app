@@ -30,7 +30,7 @@ const SignUp = () => {
     try {
       const { data } = await axios.post("/api/register", {
         name: formData.get("name"),
-        email: formData.get("email"),
+        email: formData.get("email").toLowerCase(),
         password: formData.get("password"),
         role: formData.get("role"),
       });
@@ -82,6 +82,7 @@ const SignUp = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                type={"email"}
               />
             </Grid>
             <Grid item xs={12}>
