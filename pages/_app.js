@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }) {
         <meta name="theme-color" content="#ffffff" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale = 1, shrink-to-fit = no"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
         />
         <title>Restaurant</title>
       </Head>
