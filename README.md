@@ -1,38 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+Це додаток-меню для ресторану. Він дозволяє клієнтам переглядати меню та робити замовлення за допомогою мобільного пристрою.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<h2>Технології</h2>
+<p>Цей додаток створено за допомогою наступних технологій:</p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<ul>
+  <li><p>NextJs</p></li>
+  <li><p>React</p></li>
+  <li><p>Axios</p></li>
+  <li><p>Mui</p></li>
+  <li><p>Mongo</p></li> 
+  <li><p>Formidable</p></li>
+</ul>
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<h2>Встановлення та запуск</h2>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+<ul>
+  <li><p>Клонуйте репозиторій на свій локальний комп'ютер:</p>
+  <code>git clone https://github.com/GlieXik/Restaurant-app.git</code></li>
+  <li><p>Встановіть залежності:</p>
+  <code>npm install</code></li>
+  <li><p>Запустіть додаток:</p>
+  <code>npm start</code></li>
+  <li>Відкрийте браузер та перейдіть за адресою http://localhost:3000</li>
+</ul>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<h2>Функціональність</h2>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<h3>Головна сторінка</h3>
+<p>На головній сторінці відображається загальна інформація про ресторан, а також список доступних страв.</p>
 
-## Learn More
+<h3>Сторінка вибраного стола по QR-code</h3>
+<p>На головній сторінці відображається загальна інформація про ресторан, а також список доступних страв для замовлення.</p>
 
-To learn more about Next.js, take a look at the following resources:
+<h3>Вподобані</h3>
+<p>На сторінці можна переглянути вподобані страви, видалити страви з вподобаних</p>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<h3>Кошик</h3>
+<p>На сторінці кошика можна переглянути замовлення, видалити страви з кошика, а також зробити замовлення.</p>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<h3>Адмін сторінка</h3>
+<p>На сторінці адміністратора розроблені наступні функціонал:</p>
+<ul>
+	<li>
+		<p>керування персоналом</p>
+	</li>
+	<li>
+		<p>перегляд замовлених і готових страв</p>
+	</li>
+	<li>
+		<p>статистика за рік</p>
+	</li>
+	<li>
+		<p>контролювання столів(додавання і видалення)</p>
+	</li>
+	<li>
+		<p>створення нових страв, їхня зміна</p>
+	</li>
+	<li>
+		<p>авторизація</p>
+	</li>
+</ul>
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+
+
+
+
+
