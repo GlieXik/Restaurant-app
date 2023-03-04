@@ -103,6 +103,11 @@ const Header = ({ menu }) => {
   };
 
   const mobileMenuId = "primary-search-account-menu-mobile";
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
+
+
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -119,7 +124,7 @@ const Header = ({ menu }) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <Link href={`/${router.query.tableId}/favorite`}>
+            {!isEmpty(router.query) ?   <Link href={`/${router.query.tableId}/favorite`}>
         <MenuItem onClick={handleMobileMenuClose}>
           <IconButton
             size="large"
@@ -133,9 +138,24 @@ const Header = ({ menu }) => {
 
           <p>Вподобані</p>
         </MenuItem>
-      </Link>
+      </Link>: <Link href={`/favorite`}>
+        <MenuItem onClick={handleMobileMenuClose}>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+          >
+            <Badge badgeContent={selectedLikes.length} color="error">
+              <FavoriteIcon />
+            </Badge>
+          </IconButton>
 
-      {router.asPath !== "/" && (
+          <p>Вподобані</p>
+        </MenuItem>
+      </Link>}
+    
+
+      {!isEmpty(router.query) && (
         <Link href={`/${router.query.tableId}/cart`}>
           <MenuItem onClick={handleMobileMenuClose}>
             <IconButton
@@ -214,7 +234,8 @@ const Header = ({ menu }) => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Link href="/favorite">
+            
+            <Link href="favorite">
               <IconButton
                 size="large"
                 aria-label="show 4 new mails"
@@ -225,7 +246,7 @@ const Header = ({ menu }) => {
                 </Badge>
               </IconButton>
             </Link>
-            {router.asPath !== "/" && (
+            {!isEmpty(router.query) && (
               <Link href={`/${router.query.tableId}/cart`}>
                 <IconButton
                   size="large"
